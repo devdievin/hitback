@@ -1,16 +1,22 @@
 import styled from "styled-components";
 
-const BaseInfo = styled.div`
+const Row1 = styled.div`
   grid-row: 1;
   height: 100%;
   padding: 0 1rem;
   border-bottom: 0.0625rem solid ${({ theme }) => theme.borderColor};
 `;
 
-const TabMenu = styled.div`
+const Row2 = styled.div`
   grid-row: 2;
   height: 100%;
-  border-bottom: 0.0625rem solid ${({ theme }) => theme.borderColor};
+  /* border-bottom: 0.0625rem solid ${({ theme }) => theme.borderColor}; */
+`;
+
+const TabMenu = styled.div`
+  /* grid-row: 2; */
+  /* height: 100%; */
+  /* border-bottom: 0.0625rem solid ${({ theme }) => theme.borderColor}; */
 `;
 
 const Content = styled.div`
@@ -36,7 +42,8 @@ const TagCodeHttp = styled.span`
 `;
 
 export const Styles = {
-  BaseInfo,
+  Row1,
+  Row2,
   TabMenu,
   Content,
   InfoContainer,

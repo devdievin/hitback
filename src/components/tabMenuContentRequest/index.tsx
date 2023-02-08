@@ -1,6 +1,7 @@
-// Styles
 import { useEffect, useState } from "react";
-import { TabMenuRequest } from "../../enums/TabMenuTitles";
+import { menuRequestTitles } from "../../utils/tabMenuTitles";
+
+// Styles
 import { Styles } from "./styles";
 
 type TabContentProps = {
@@ -12,23 +13,23 @@ export default function TabMenuContentRequest({ menu }: TabContentProps) {
 
   useEffect(() => {
     switch (menu) {
-      case TabMenuRequest.BODY:
-        setMenuName(TabMenuRequest.BODY);
+      case menuRequestTitles[0].text:
+        setMenuName(menuRequestTitles[0].text);
         break;
-      case TabMenuRequest.HEADERS:
-        setMenuName(TabMenuRequest.HEADERS);
+      case menuRequestTitles[1].text:
+        setMenuName(menuRequestTitles[1].text);
         break;
-      case TabMenuRequest.AUTHORIZATION:
-        setMenuName(TabMenuRequest.AUTHORIZATION);
+      case menuRequestTitles[2].text:
+        setMenuName(menuRequestTitles[2].text);
         break;
-      case TabMenuRequest.QUERY:
-        setMenuName(TabMenuRequest.QUERY);
+      case menuRequestTitles[3].text:
+        setMenuName(menuRequestTitles[3].text);
         break;
       default:
         setMenuName("default");
         break;
     }
-    console.log(menuName);
+    // console.log(menuName);
   }, [menu]);
 
   return (

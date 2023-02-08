@@ -1,10 +1,16 @@
 import axios from "axios";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { TabMenuRequest } from "../../enums/TabMenuTitles";
-import { Wrapper } from "../../styles/global";
+import { MenuAction } from "../../enums/MenuAction";
+import { menuRequestTitles } from "../../utils/tabMenuTitles";
+
+// Components
+import TabMenuComponent from "../tabMenuComponent";
 import TabMenuContentRequest from "../tabMenuContentRequest";
-import TabMenuHeader from "../tabMenuHeader";
+
+// Styles
+import { Wrapper } from "../../styles/global";
 import { Styles } from "./styles";
 
 type FormDataRequest = {
@@ -14,6 +20,9 @@ type FormDataRequest = {
 export default function ManageRequest() {
   const [url, setUrl] = useState("http://localhost:3000/api/posts");
   const { register, handleSubmit } = useForm<FormDataRequest>();
+  const { menuRequestSelected } = useSelector(
+    (rootReducer: any) => rootReducer.tabMenuReducer
+  );
 
   const onSubmit = async (data: FormDataRequest) => {
     try {
@@ -29,7 +38,7 @@ export default function ManageRequest() {
 
   return (
     <>
-      <Styles.InputGroup>
+      <Styles.Row1>
         <Wrapper>
           <Styles.Method>GET</Styles.Method>
           <Styles.Form onSubmit={handleSubmit(onSubmit)}>
@@ -43,20 +52,15 @@ export default function ManageRequest() {
             <Styles.ButtonRequest type="submit">Send</Styles.ButtonRequest>
           </Styles.Form>
         </Wrapper>
-      </Styles.InputGroup>
-      <Styles.TabMenu>
-        <TabMenuHeader
-          titles={[
-            TabMenuRequest.BODY,
-            TabMenuRequest.HEADERS,
-            TabMenuRequest.AUTHORIZATION,
-            TabMenuRequest.QUERY,
-          ]}
-        />
-      </Styles.TabMenu>
-      <Styles.Content>
-        <TabMenuContentRequest menu={"other"} />
-      </Styles.Content>
+      </Styles.Row1>
+      <Styles.Row2>
+        <TabMenuComponent
+          menus={menuRequestTitles}
+          menuActionIn={MenuAction.REQUEST}
+        >
+          <TabMenuContentRequest menu={menuRequestSelected.text} />
+        </TabMenuComponent>
+      </Styles.Row2>
     </>
   );
 }

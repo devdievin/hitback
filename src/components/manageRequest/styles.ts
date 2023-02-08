@@ -1,21 +1,27 @@
 import styled from "styled-components";
 
-const InputGroup = styled.div`
+const Row1 = styled.div`
   grid-row: 1;
   height: 100%;
   border-bottom: 0.0625rem solid ${({ theme }) => theme.borderColor};
 `;
 
-const TabMenu = styled.div`
+const Row2 = styled.div`
   grid-row: 2;
   height: 100%;
-  border-bottom: 0.0625rem solid ${({ theme }) => theme.borderColor};
+  /* border-bottom: 0.0625rem solid ${({ theme }) => theme.borderColor}; */
 `;
 
-const Content = styled.div`
-  grid-row: 3;
-  height: 100%;
-`;
+// const TabMenu = styled.div`
+//   /* grid-row: 2; */
+//   /* height: 100%; */
+//   /* border-bottom: 0.0625rem solid ${({ theme }) => theme.borderColor}; */
+// `;
+
+// const Content = styled.div`
+//   grid-row: 3;
+//   height: 100%;
+// `;
 
 const Form = styled.form`
   display: flex;
@@ -74,9 +80,10 @@ const ButtonRequest = styled.button`
 // `;
 
 export const Styles = {
-  InputGroup,
-  TabMenu,
-  Content,
+  Row1,
+  Row2,
+  // TabMenu,
+  // Content,
   Form,
   Method,
   InputRequest,

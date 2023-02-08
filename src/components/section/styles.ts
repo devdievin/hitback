@@ -3,7 +3,8 @@ import styled from "styled-components";
 const Section = styled.section`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 3rem 3rem auto;
+  /* grid-template-rows: 3rem 3rem auto; */
+  grid-template-rows: 3rem auto;
   justify-content: center;
   align-items: center;
 
