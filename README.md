@@ -5,6 +5,7 @@ Requirements:
 - Redux/Context API **(Installed)**;
 - Axios **(Installed)**;
 - React Router DOM **(Installed)**;
+- React Hook Forms **(Installed)**;
 - Theme Color;
 - Clean code;
 - Functional programming;

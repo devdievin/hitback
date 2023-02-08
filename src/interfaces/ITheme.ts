@@ -1,5 +1,6 @@
 export interface IThemeValues {
   background: string;
+  backgroundSecondary: string;
   color: string;
   borderColor: string;
   name: string;

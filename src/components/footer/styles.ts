@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const Footer = styled.footer`
+  height: 2.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -2,15 +2,17 @@ import { ITheme, IThemeValues } from "../interfaces/ITheme";
 import { colors } from "./colors";
 
 const light: IThemeValues = {
-  background: colors.softWhite,
+  background: colors.white,
+  backgroundSecondary: colors.softWhite,
   color: colors.darkTwo,
-  borderColor: colors.lightGray,
+  borderColor: colors.softGray,
   name: "light",
   colors: colors,
 };
 
 const dark: IThemeValues = {
-  background: colors.darkOne,
+  background: colors.darkTwo,
+  backgroundSecondary: colors.darkThree,
   color: colors.white,
   borderColor: colors.darkOne,
   name: "dark",

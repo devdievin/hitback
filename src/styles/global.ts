@@ -9,7 +9,16 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     height: 100%;
-    font-family: Tahoma, Helvetica, Arial, Roboto, sans-serif;
-    /* transition: all 0.50s linear; */
+    /* font-family: Tahoma, Helvetica, Arial, Roboto, sans-serif; */
+    font-family: 'Inter', sans-serif;
+    transition: all 0.50s linear;
   }
   `;
+
+export const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
