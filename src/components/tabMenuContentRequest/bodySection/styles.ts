@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
-const Content = styled.div`
-  height: 100%;
-  padding: 1rem;
+const Container = styled.div`
+    height: 100%;
 `;
 
 export const Styles = {
-  Content,
+  Container,
 };

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { MenuAction } from "../../enums/MenuAction";
 import { menuRequestTitles } from "../../utils/tabMenuTitles";
@@ -12,23 +12,27 @@ import TabMenuContentRequest from "../tabMenuContentRequest";
 // Styles
 import { Wrapper } from "../../styles/global";
 import { Styles } from "./styles";
+import { getRequestAction } from "../../redux/request/requestActions";
 
 type FormDataRequest = {
   url: string;
 };
 
 export default function ManageRequest() {
-  const [url, setUrl] = useState("http://localhost:3000/api/posts");
+  const [url, setUrl] = useState("https://jsonplaceholder.typicode.com/posts");
   const { register, handleSubmit } = useForm<FormDataRequest>();
   const { menuRequestSelected } = useSelector(
     (rootReducer: any) => rootReducer.tabMenuReducer
   );
+  const dispatch = useDispatch();
 
   const onSubmit = async (data: FormDataRequest) => {
     try {
       console.log(data);
 
       const response = await axios.get(data.url);
+
+      dispatch(getRequestAction(response));
 
       console.log(response);
     } catch (error) {

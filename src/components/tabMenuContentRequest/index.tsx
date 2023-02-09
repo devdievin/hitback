@@ -1,40 +1,36 @@
 import { useEffect, useState } from "react";
+import { TabMenuContentProps } from "../../types";
 import { menuRequestTitles } from "../../utils/tabMenuTitles";
+
+// Components
+import BodySection from "./bodySection";
 
 // Styles
 import { Styles } from "./styles";
 
-type TabContentProps = {
-  menu: string;
-};
-
-export default function TabMenuContentRequest({ menu }: TabContentProps) {
-  const [menuName, setMenuName] = useState("default");
+export default function TabMenuContentRequest({ menu }: TabMenuContentProps) {
+  const [element, setElement] = useState<JSX.Element | null>(null);
 
   useEffect(() => {
     switch (menu) {
       case menuRequestTitles[0].text:
-        setMenuName(menuRequestTitles[0].text);
+        setElement(<BodySection />);
         break;
       case menuRequestTitles[1].text:
-        setMenuName(menuRequestTitles[1].text);
+        setElement(<div>Headers here...</div>);
         break;
       case menuRequestTitles[2].text:
-        setMenuName(menuRequestTitles[2].text);
+        setElement(<div>Authorization here...</div>);
         break;
       case menuRequestTitles[3].text:
-        setMenuName(menuRequestTitles[3].text);
+        setElement(<div>Query here...</div>);
         break;
       default:
-        setMenuName("default");
+        setElement(<div>Sorry! Not Found...</div>);
         break;
     }
-    // console.log(menuName);
+    console.log("render 1");
   }, [menu]);
 
-  return (
-    <Styles.Content>
-      <p>{menuName}</p>
-    </Styles.Content>
-  );
+  return <Styles.Content>{element}</Styles.Content>;
 }

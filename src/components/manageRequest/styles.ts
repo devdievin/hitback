@@ -12,17 +12,6 @@ const Row2 = styled.div`
   /* border-bottom: 0.0625rem solid ${({ theme }) => theme.borderColor}; */
 `;
 
-// const TabMenu = styled.div`
-//   /* grid-row: 2; */
-//   /* height: 100%; */
-//   /* border-bottom: 0.0625rem solid ${({ theme }) => theme.borderColor}; */
-// `;
-
-// const Content = styled.div`
-//   grid-row: 3;
-//   height: 100%;
-// `;
-
 const Form = styled.form`
   display: flex;
   width: 100%;
@@ -48,7 +37,8 @@ const InputRequest = styled.input`
   &:focus-visible {
     outline: none;
     text-decoration: underline;
-    background-color: ${({ theme }) => theme.colors.darkOne};
+    background-color: ${({ theme }) =>
+      theme.name === "dark" ? theme.colors.darkOne : theme.colors.softGray};
   }
 `;
 
@@ -67,26 +57,11 @@ const ButtonRequest = styled.button`
   }
 `;
 
-// const Menu = styled.div`
-//   width: 100%;
-//   height: 100%;
-//   display: flex;
-//   justify-content: flex-start;
-//   align-items: center;
-
-//   p {
-//     padding: 0 1rem;
-//   }
-// `;
-
 export const Styles = {
   Row1,
   Row2,
-  // TabMenu,
-  // Content,
   Form,
   Method,
   InputRequest,
   ButtonRequest,
-  // Menu,
 };
