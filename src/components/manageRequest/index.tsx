@@ -36,6 +36,7 @@ export default function ManageRequest() {
 
       console.log(response);
     } catch (error) {
+      dispatch(getRequestAction(error.response));
       console.error(error);
     }
   };

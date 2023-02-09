@@ -10,13 +10,6 @@ const Row1 = styled.div`
 const Row2 = styled.div`
   grid-row: 2;
   height: 100%;
-  /* border-bottom: 0.0625rem solid ${({ theme }) => theme.borderColor}; */
-`;
-
-const TabMenu = styled.div`
-  /* grid-row: 2; */
-  /* height: 100%; */
-  /* border-bottom: 0.0625rem solid ${({ theme }) => theme.borderColor}; */
 `;
 
 const Content = styled.div`
@@ -33,19 +26,9 @@ const InfoContainer = styled.div`
   gap: 0.875rem;
 `;
 
-const TagCodeHttp = styled.span`
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.darkTwo};
-  background-color: ${({ theme }) => theme.colors.green};
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.125rem;
-`;
-
 export const Styles = {
   Row1,
   Row2,
-  TabMenu,
   Content,
   InfoContainer,
-  TagCodeHttp,
 };

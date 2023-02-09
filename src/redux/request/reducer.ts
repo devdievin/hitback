@@ -5,7 +5,7 @@ import requestTypes from "./requestTypes";
 const INITIAL_STATE: IRequest = {
   data: [],
   headers: new AxiosHeaders(undefined),
-  status: 0,
+  status: 100,
 };
 
 const requestReducer = (state = INITIAL_STATE, action: any) => {
