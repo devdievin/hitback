@@ -4,15 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { MenuAction } from "../../enums/MenuAction";
 import { menuRequestTitles } from "../../utils/tabMenuTitles";
+import { getRequestAction } from "../../redux/request/requestActions";
 
 // Components
 import TabMenuComponent from "../tabMenuComponent";
 import TabMenuContentRequest from "../tabMenuContentRequest";
+import Dropdown from "../dropdown";
 
 // Styles
 import { Wrapper } from "../../styles/global";
 import { Styles } from "./styles";
-import { getRequestAction } from "../../redux/request/requestActions";
 
 type FormDataRequest = {
   url: string;
@@ -45,7 +46,20 @@ export default function ManageRequest() {
     <>
       <Styles.Row1>
         <Wrapper>
-          <Styles.Method>GET</Styles.Method>
+          {/* <Styles.Method>GET</Styles.Method> */}
+          <Dropdown
+            text="GET"
+            children={
+              <div>
+                Dropdown content
+                <br />
+                Dropdown content
+                <br />
+                Dropdown content
+                <br />
+              </div>
+            }
+          />
           <Styles.Form onSubmit={handleSubmit(onSubmit)}>
             <Styles.InputRequest
               {...register("url")}

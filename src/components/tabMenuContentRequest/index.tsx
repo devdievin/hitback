@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { TabMenuContentProps } from "../../types";
 import { menuRequestTitles } from "../../utils/tabMenuTitles";
 
@@ -9,27 +9,20 @@ import BodySection from "./bodySection";
 import { Styles } from "./styles";
 
 export default function TabMenuContentRequest({ menu }: TabMenuContentProps) {
-  const [element, setElement] = useState<JSX.Element | null>(null);
-
-  useEffect(() => {
+  const element = useMemo(() => {
+    // console.log("render Tab Request");
     switch (menu) {
       case menuRequestTitles[0].text:
-        setElement(<BodySection />);
-        break;
+        return <BodySection />;
       case menuRequestTitles[1].text:
-        setElement(<div>Headers here...</div>);
-        break;
+        return <div>Headers here...</div>;
       case menuRequestTitles[2].text:
-        setElement(<div>Authorization here...</div>);
-        break;
+        return <div>Authorization here...</div>;
       case menuRequestTitles[3].text:
-        setElement(<div>Query here...</div>);
-        break;
+        return <div>Query here...</div>;
       default:
-        setElement(<div>Sorry! Not Found...</div>);
-        break;
+        return <div>Sorry! Not Found...</div>;
     }
-    console.log("render 1");
   }, [menu]);
 
   return <Styles.Content>{element}</Styles.Content>;

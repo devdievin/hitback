@@ -2,15 +2,13 @@ import styled from "styled-components";
 import { colors } from "../../../styles/colors";
 
 const Container = styled.div`
-  width: 420px;
-  height: 380px;
+  width: 100%;
+  height: 100%;
   /* overflow: scroll; */
-  /* background-color: ${colors.darkTwo}; */
-  /* padding: 1rem; */
 
-  ::-webkit-scrollbar {
+  /* ::-webkit-scrollbar {
     display: none;
-  }
+  } */
 `;
 
 export const Styles = {

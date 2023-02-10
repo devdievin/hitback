@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { BodyTypes } from "../../../enums/BodyTypes";
+import { setBodyType } from "../../../redux/request/requestActions";
 
 // Components
 import RadioButton from "../../radioButton";
@@ -10,35 +13,54 @@ import PlainTextComponent from "./plainTextComponent";
 import { Styles } from "./styles";
 
 export default function BodySection() {
-  const [element, setElement] = useState<JSX.Element>(<NoneComponent />);
+  const dispatch = useDispatch();
+  const { bodyType } = useSelector(
+    (rootReducer: any) => rootReducer.requestReducer
+  );
 
-  const toggleBody = (el: JSX.Element) => {
-    setElement(el);
+  const element = useMemo(() => {
+    switch (bodyType) {
+      case BodyTypes.NONE:
+        return <NoneComponent />;
+      case BodyTypes.JSON:
+        return <JsonComponent />;
+      case BodyTypes.PLAIN:
+        return <PlainTextComponent />;
+    }
+  }, [bodyType]);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setBodyType(event.target.value));
   };
 
   return (
     <Styles.Container>
-      {/* <p>Body content here...</p> */}
-      <form style={{ display: "flex", gap: "1rem" }}>
+      <Styles.InputGroup>
         <RadioButton
           id="radio1"
           name="test"
-          label="none"
-          onClick={() => toggleBody(<NoneComponent />)}
+          label={BodyTypes.NONE}
+          value={BodyTypes.NONE}
+          checked={bodyType === BodyTypes.NONE}
+          onChange={handleChange}
         />
         <RadioButton
           id="radio2"
           name="test"
-          label="JSON"
-          onClick={() => toggleBody(<JsonComponent />)}
+          label={BodyTypes.JSON}
+          value={BodyTypes.JSON}
+          checked={bodyType === BodyTypes.JSON}
+          onChange={handleChange}
         />
         <RadioButton
           id="radio3"
           name="test"
-          label="Plain text"
-          onClick={() => toggleBody(<PlainTextComponent />)}
+          label={BodyTypes.PLAIN}
+          value={BodyTypes.PLAIN}
+          checked={bodyType === BodyTypes.PLAIN}
+          onChange={handleChange}
         />
-      </form>
+      </Styles.InputGroup>
 
       {element}
     </Styles.Container>
