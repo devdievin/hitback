@@ -1,7 +1,10 @@
 import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BodyTypes } from "../../../enums/BodyTypes";
-import { setBodyType } from "../../../redux/request/requestActions";
+import {
+  setBodyData,
+  setBodyType,
+} from "../../../redux/request/requestActions";
 
 // Components
 import RadioButton from "../../radioButton";
@@ -14,7 +17,7 @@ import { Styles } from "./styles";
 
 export default function BodySection() {
   const dispatch = useDispatch();
-  const { bodyType } = useSelector(
+  const { bodyType, bodyData } = useSelector(
     (rootReducer: any) => rootReducer.requestReducer
   );
 
@@ -30,7 +33,10 @@ export default function BodySection() {
   }, [bodyType]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setBodyType(event.target.value));
+    const { value } = event.target;
+    dispatch(setBodyType(value));
+
+    if (value === BodyTypes.NONE) dispatch(setBodyData(""));
   };
 
   return (

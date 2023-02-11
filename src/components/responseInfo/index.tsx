@@ -1,3 +1,4 @@
+import { AxiosHeaders } from "axios";
 import { useSelector } from "react-redux";
 import { MenuAction } from "../../enums/MenuAction";
 import { menuResponseTitles } from "../../utils/tabMenuTitles";
@@ -15,7 +16,7 @@ export default function ResponseInfo() {
     (rootReducer: any) => rootReducer.tabMenuReducer
   );
 
-  const { status } = useSelector(
+  const { headers, status } = useSelector(
     (rootReducer: any) => rootReducer.requestReducer
   );
 
@@ -24,8 +25,14 @@ export default function ResponseInfo() {
       <Styles.Row1>
         <Styles.InfoContainer>
           <TagHttpCode code={status} />
-          <p>72ms</p>
-          <p>29 B</p>
+          <p>
+            {headers["request-duration"] ? headers["request-duration"] : "0ms"}
+          </p>
+          <p>
+            {headers["content-length"]
+              ? `${headers["content-length"]} bytes`
+              : "0 bytes"}
+          </p>
         </Styles.InfoContainer>
       </Styles.Row1>
       <Styles.Row2>

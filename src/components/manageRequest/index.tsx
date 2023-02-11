@@ -1,19 +1,21 @@
-import axios from "axios";
+import { AxiosResponse } from "axios";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { MenuAction } from "../../enums/MenuAction";
 import { menuRequestTitles } from "../../utils/tabMenuTitles";
 import { getRequestAction } from "../../redux/request/requestActions";
+import axiosManager from "../../services/axiosManager";
 
 // Components
 import TabMenuComponent from "../tabMenuComponent";
 import TabMenuContentRequest from "../tabMenuContentRequest";
 import Dropdown from "../dropdown";
+import MenuHttpMethod from "../menuHttpMethod";
 
 // Styles
+import { Row1, InputRequest, ButtonRequest, Row2, Form } from "./styles";
 import { Wrapper } from "../../styles/global";
-import { Styles } from "./styles";
 
 type FormDataRequest = {
   url: string;
@@ -22,18 +24,23 @@ type FormDataRequest = {
 export default function ManageRequest() {
   const [url, setUrl] = useState("https://jsonplaceholder.typicode.com/posts");
   const { register, handleSubmit } = useForm<FormDataRequest>();
+
+  const dispatch = useDispatch();
+
   const { menuRequestSelected } = useSelector(
     (rootReducer: any) => rootReducer.tabMenuReducer
   );
-  const dispatch = useDispatch();
+
+  const { httpMethod, bodyData } = useSelector(
+    (rootReducer: any) => rootReducer.requestReducer
+  );
 
   const onSubmit = async (data: FormDataRequest) => {
     try {
-      console.log(data);
+      // console.log(data);
+      const response = await axiosManager(httpMethod, data.url, bodyData);
 
-      const response = await axios.get(data.url);
-
-      dispatch(getRequestAction(response));
+      dispatch(getRequestAction(response as AxiosResponse));
 
       console.log(response);
     } catch (error) {
@@ -44,42 +51,29 @@ export default function ManageRequest() {
 
   return (
     <>
-      <Styles.Row1>
+      <Row1>
         <Wrapper>
-          {/* <Styles.Method>GET</Styles.Method> */}
-          <Dropdown
-            text="GET"
-            children={
-              <div>
-                Dropdown content
-                <br />
-                Dropdown content
-                <br />
-                Dropdown content
-                <br />
-              </div>
-            }
-          />
-          <Styles.Form onSubmit={handleSubmit(onSubmit)}>
-            <Styles.InputRequest
+          <Dropdown children={<MenuHttpMethod />} />
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <InputRequest
               {...register("url")}
               type={"text"}
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               required={true}
             />
-            <Styles.ButtonRequest type="submit">Send</Styles.ButtonRequest>
-          </Styles.Form>
+            <ButtonRequest type="submit">Send</ButtonRequest>
+          </Form>
         </Wrapper>
-      </Styles.Row1>
-      <Styles.Row2>
+      </Row1>
+      <Row2>
         <TabMenuComponent
           menus={menuRequestTitles}
           menuActionIn={MenuAction.REQUEST}
         >
           <TabMenuContentRequest menu={menuRequestSelected.text} />
         </TabMenuComponent>
-      </Styles.Row2>
+      </Row2>
     </>
   );
 }
