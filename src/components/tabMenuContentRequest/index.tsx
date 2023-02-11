@@ -4,9 +4,10 @@ import { menuRequestTitles } from "../../utils/tabMenuTitles";
 
 // Components
 import BodySection from "./bodySection";
+import Unavailable from "../unavailable";
 
 // Styles
-import { Styles } from "./styles";
+import { Content } from "./styles";
 
 export default function TabMenuContentRequest({ menu }: TabMenuContentProps) {
   const element = useMemo(() => {
@@ -15,15 +16,19 @@ export default function TabMenuContentRequest({ menu }: TabMenuContentProps) {
       case menuRequestTitles[0].text:
         return <BodySection />;
       case menuRequestTitles[1].text:
-        return <div>Headers here...</div>;
+        // return <div>Headers here...</div>;
+        return <Unavailable />;
       case menuRequestTitles[2].text:
-        return <div>Authorization here...</div>;
+        // return <div>Authorization here...</div>;
+        return <Unavailable />;
       case menuRequestTitles[3].text:
-        return <div>Query here...</div>;
+        // return <div>Query here...</div>;
+        return <Unavailable />;
       default:
-        return <div>Sorry! Not Found...</div>;
+        return <Unavailable />;
+      // return <div>Sorry! Not Found...</div>;
     }
   }, [menu]);
 
-  return <Styles.Content>{element}</Styles.Content>;
+  return <Content>{element}</Content>;
 }

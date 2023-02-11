@@ -4,9 +4,11 @@ import { menuResponseTitles } from "../../utils/tabMenuTitles";
 
 // Components
 import ResponseSection from "./responseSection";
+import HeadersSection from "./headersSection";
+import Unavailable from "../unavailable";
 
 // Styles
-import { Styles } from "./styles";
+import { Content } from "./styles";
 
 export default function TabMenuContentResponse({ menu }: TabMenuContentProps) {
   const element = useMemo(() => {
@@ -15,15 +17,18 @@ export default function TabMenuContentResponse({ menu }: TabMenuContentProps) {
       case menuResponseTitles[0].text:
         return <ResponseSection />;
       case menuResponseTitles[1].text:
-        return <div>Headers here...</div>;
+        return <HeadersSection />;
       case menuResponseTitles[2].text:
-        return <div>Cookies here...</div>;
+        // return <div>Cookies here...</div>;
+        return <Unavailable />;
       case menuResponseTitles[3].text:
-        return <div>History here...</div>;
+        // return <div>History here...</div>;
+        return <Unavailable />;
       default:
-        return <div>Sorry! Not Found...</div>;
+        return <Unavailable />;
+      // return <div>Sorry! Not Found...</div>;
     }
   }, [menu]);
 
-  return <Styles.Content>{element}</Styles.Content>;
+  return <Content>{element}</Content>;
 }
