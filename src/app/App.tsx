@@ -12,7 +12,7 @@ import ResponseInfo from "../components/responseInfo";
 // Styles
 import { GlobalStyles } from "../styles/global";
 import { theme } from "../styles/theme";
-import { Styles } from "./styles";
+import { Main } from "./styles";
 
 function App() {
   const { state } = useThemeContext();
@@ -24,7 +24,7 @@ function App() {
       <div>
         <GlobalStyles />
         <Header />
-        <Styles.Main>
+        <Main>
           <Section>
             <Workspace />
           </Section>
@@ -34,7 +34,7 @@ function App() {
           <Section>
             <ResponseInfo />
           </Section>
-        </Styles.Main>
+        </Main>
         <Footer />
       </div>
     </ThemeProvider>

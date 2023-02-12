@@ -1,66 +1,99 @@
-import axios from "axios";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { AxiosResponse } from "axios";
+import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { MenuAction } from "../../enums/MenuAction";
 import { menuRequestTitles } from "../../utils/tabMenuTitles";
+import {
+  getRequestAction,
+  setIsLoading,
+} from "../../redux/request/requestActions";
+import axiosManager from "../../services/axiosManager";
 
 // Components
 import TabMenuComponent from "../tabMenuComponent";
 import TabMenuContentRequest from "../tabMenuContentRequest";
+import Dropdown from "../dropdown";
+import MenuHttpMethod from "../menuHttpMethod";
 
 // Styles
+import { Row1, InputRequest, ButtonRequest, Row2, Form } from "./styles";
 import { Wrapper } from "../../styles/global";
-import { Styles } from "./styles";
 
 type FormDataRequest = {
   url: string;
 };
 
 export default function ManageRequest() {
-  const [url, setUrl] = useState("http://localhost:3000/api/posts");
+  // const [url, setUrl] = useState("https://jsonplaceholder.typicode.com/posts");
+  const [url, setUrl] = useState("");
   const { register, handleSubmit } = useForm<FormDataRequest>();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const dispatch = useDispatch();
+
   const { menuRequestSelected } = useSelector(
     (rootReducer: any) => rootReducer.tabMenuReducer
   );
 
+  const { httpMethod, bodyData } = useSelector(
+    (rootReducer: any) => rootReducer.requestReducer
+  );
+
+  const handleFocus = (e: any) => {
+    if (inputRef.current) {
+      inputRef.current.selectionEnd = inputRef.current.value.length;
+    }
+  };
+
   const onSubmit = async (data: FormDataRequest) => {
     try {
       console.log(data);
+      // console.log(bodyData);
+      dispatch(setIsLoading(true));
+      const response = await axiosManager(httpMethod, data.url, bodyData);
 
-      const response = await axios.get(data.url);
+      dispatch(getRequestAction(response as AxiosResponse));
 
-      console.log(response);
+      // console.log(response);
     } catch (error) {
+      dispatch(setIsLoading(false));
+      dispatch(getRequestAction(error.response));
       console.error(error);
+    } finally {
+      dispatch(setIsLoading(false));
     }
   };
 
   return (
     <>
-      <Styles.Row1>
+      <Row1>
         <Wrapper>
-          <Styles.Method>GET</Styles.Method>
-          <Styles.Form onSubmit={handleSubmit(onSubmit)}>
-            <Styles.InputRequest
+          <Dropdown children={<MenuHttpMethod />} />
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <InputRequest
               {...register("url")}
               type={"text"}
               value={url}
+              placeholder={"https://api.example.com/v1/products"}
               onChange={(e) => setUrl(e.target.value)}
+              autoComplete={"off"}
               required={true}
+              onFocus={handleFocus}
+              // ref={inputRef}
             />
-            <Styles.ButtonRequest type="submit">Send</Styles.ButtonRequest>
-          </Styles.Form>
+            <ButtonRequest type="submit">Send</ButtonRequest>
+          </Form>
         </Wrapper>
-      </Styles.Row1>
-      <Styles.Row2>
+      </Row1>
+      <Row2>
         <TabMenuComponent
           menus={menuRequestTitles}
           menuActionIn={MenuAction.REQUEST}
         >
           <TabMenuContentRequest menu={menuRequestSelected.text} />
         </TabMenuComponent>
-      </Styles.Row2>
+      </Row2>
     </>
   );
 }

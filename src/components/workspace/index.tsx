@@ -1,75 +1,67 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { colors } from "../../styles/colors";
-import Button from "../button";
+import { useThemeContext } from "../../hooks/useThemeContext";
+
+// Components
 import Input from "../input";
-import { Styles } from "./styles";
+import AddIcon from "../svgIcon/addIcon";
+
+// Styles
+import {
+  ButtonAdd,
+  EnvGroup,
+  EnvStatus,
+  InputContainer,
+  InputGroup,
+  Row1,
+  Row2,
+  WorkspaceContent,
+} from "./styles";
+import { colors } from "../../styles/colors";
 
 export default function Workspace() {
+  const { state } = useThemeContext();
   const [filter, setFilter] = useState("");
 
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-  };
-
   return (
     <>
-      <Styles.Row1>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            // gap: "1rem",
-            padding: "0 1rem",
-            height: "100%",
-          }}
-        >
-          <p>
-            Environment:{" "}
-            <span style={{ color: colors.green, fontWeight: "600" }}>Dev</span>
-          </p>
-        </div>
-      </Styles.Row1>
+      <Row1>
+        <EnvGroup>
+          Environment:
+          <EnvStatus>Dev</EnvStatus>
+        </EnvGroup>
+      </Row1>
 
-      <Styles.Row2>
-        <Styles.InputGroup>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "1rem",
-              padding: "0 1rem",
-            }}
-          >
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              style={{ display: "flex", width: "100%", gap: "1rem" }}
-            >
-              <Input
-                register={register}
-                type={"text"}
-                name={"filter"}
-                value={filter}
-                placeholder="Search"
-                onChange={(e) => setFilter(e.target.value)}
-              />
-
-              <img
-                src="./icons/icon-add-circle.svg"
-                alt="add"
+      <Row2>
+        <InputContainer>
+          <InputGroup>
+            <Input
+              register={register}
+              type={"text"}
+              name={"filter"}
+              value={filter}
+              placeholder="Search"
+              onChange={(e) => setFilter(e.target.value)}
+              disabled={true}
+            />
+            <ButtonAdd>
+              <AddIcon
                 width={36}
                 height={36}
+                fill={
+                  state.themeName === "dark" ? colors.softWhite : colors.darkTwo
+                }
               />
-            </form>
-          </div>
-        </Styles.InputGroup>
+            </ButtonAdd>
+          </InputGroup>
+        </InputContainer>
 
-        <Styles.Workspace>
-          <div style={{ padding: "1rem" }}>Workspace</div>
-        </Styles.Workspace>
-      </Styles.Row2>
+        <WorkspaceContent>
+          Workspace
+        </WorkspaceContent>
+      </Row2>
     </>
   );
 }

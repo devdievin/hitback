@@ -1,7 +1,7 @@
 import { FieldValues, UseFormRegister } from "react-hook-form";
 
 // Styles
-import { Styles } from "./styles";
+import { InputComponent } from "./styles";
 
 type InputProps = {
   type: React.HTMLInputTypeAttribute;
@@ -25,7 +25,7 @@ export default function Input({
   onChange,
 }: InputProps) {
   return (
-    <Styles.Input
+    <InputComponent
       {...register(name)}
       type={type}
       value={value}

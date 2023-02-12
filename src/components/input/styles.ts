@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Input = styled.input`
+export const InputComponent = styled.input`
   width: 100%;
   font-size: 1rem;
   color: ${({ theme }) => theme.color};
@@ -17,7 +17,3 @@ const Input = styled.input`
     outline: none;
   }
 `;
-
-export const Styles = {
-  Input,
-};

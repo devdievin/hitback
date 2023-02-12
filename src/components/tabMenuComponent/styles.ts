@@ -1,11 +1,11 @@
-import { colors } from "../../styles/colors";
 import styled from "styled-components";
+import { colors } from "../../styles/colors";
 
-const Container = styled.div`
+export const Container = styled.div`
   height: 100%;
 `;
 
-const TabMenu = styled.div`
+export const TabMenu = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -14,18 +14,18 @@ const TabMenu = styled.div`
   border-bottom: 0.0625rem solid ${({ theme }) => theme.borderColor};
 `;
 
-const Content = styled.div`
+export const Content = styled.div`
   height: calc(100% - 3rem);
 `;
 
-const Item = styled.div`
+export const Item = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   height: 100%;
   padding: 0 1rem;
   box-sizing: content-box;
-  transition: all 0.3s linear;
+  transition: background 0.3s linear;
 
   &:hover {
     background-color: ${({ theme }) =>
@@ -34,38 +34,17 @@ const Item = styled.div`
       theme.name === "dark" ? colors.softWhite : colors.darkOne};
     cursor: pointer;
   }
-
-  /* &.active {
-    border-bottom: 0.0625rem solid ${({ theme }) => theme.backgroundSecondary};
-  }
-
-  &.active:first-child {
-    border-right: 0.0625rem solid ${colors.darkOne};
-  }
-
-  &.active:not(:first-child) {
-    border-left: 0.0625rem solid ${colors.darkOne};
-    border-right: 0.0625rem solid ${colors.darkOne};
-  } */
 `;
 
-const ItemActive = styled(Item)`
+export const ItemActive = styled(Item)`
   border-bottom: 0.0625rem solid ${({ theme }) => theme.backgroundSecondary};
 
   &:first-child {
-    border-right: 0.0625rem solid ${colors.darkOne};
+    border-right: 0.0625rem solid ${({ theme }) => theme.borderColor};
   }
 
   &:not(:first-child) {
-    border-left: 0.0625rem solid ${colors.darkOne};
-    border-right: 0.0625rem solid ${colors.darkOne};
+    border-left: 0.0625rem solid ${({ theme }) => theme.borderColor};
+    border-right: 0.0625rem solid ${({ theme }) => theme.borderColor};
   }
 `;
-
-export const Styles = {
-  Container,
-  TabMenu,
-  Content,
-  Item,
-  ItemActive,
-};

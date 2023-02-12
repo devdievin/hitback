@@ -1,92 +1,58 @@
 import styled from "styled-components";
 
-const Row1 = styled.div`
+export const Row1 = styled.div`
   grid-row: 1;
   height: 100%;
   border-bottom: 0.0625rem solid ${({ theme }) => theme.borderColor};
 `;
 
-const Row2 = styled.div`
+export const Row2 = styled.div`
   grid-row: 2;
   height: 100%;
-  /* border-bottom: 0.0625rem solid ${({ theme }) => theme.borderColor}; */
 `;
 
-// const TabMenu = styled.div`
-//   /* grid-row: 2; */
-//   /* height: 100%; */
-//   /* border-bottom: 0.0625rem solid ${({ theme }) => theme.borderColor}; */
-// `;
-
-// const Content = styled.div`
-//   grid-row: 3;
-//   height: 100%;
-// `;
-
-const Form = styled.form`
+export const Form = styled.form`
   display: flex;
   width: 100%;
   height: 100%;
 `;
 
-const Method = styled.span`
+export const Method = styled.span`
   font-weight: 600;
   color: ${({ theme }) => theme.colors.blue};
   margin-left: 0.625rem;
 `;
 
-const InputRequest = styled.input`
+export const InputRequest = styled.input`
   font-size: 1rem;
   color: ${({ theme }) => theme.color};
   background-color: ${({ theme }) => theme.backgroundSecondary};
   width: 100%;
   height: 100%;
-  padding: 0 0.625rem;
+  padding: 0 0.625rem 0 0;
   border: none;
 
-  &:focus,
-  &:focus-visible {
+  :focus,
+  :focus-visible {
     outline: none;
-    text-decoration: underline;
-    background-color: ${({ theme }) => theme.colors.darkOne};
+    /* text-decoration: underline; */
+    /* background-color: ${({ theme }) =>
+      theme.name === "dark" ? theme.colors.darkOne : theme.colors.softGray}; */
   }
 `;
 
-const ButtonRequest = styled.button`
+export const ButtonRequest = styled.button`
   width: max-content;
   height: 100%;
   font-size: 1rem;
+  font-weight: 600;
   background-color: ${({ theme }) => theme.colors.blue};
   color: ${({ theme }) => theme.colors.white};
   padding: 0.625rem 1.5rem;
   border: none;
   cursor: pointer;
 
-  &:hover {
+  :hover {
     opacity: 0.7;
   }
 `;
-
-// const Menu = styled.div`
-//   width: 100%;
-//   height: 100%;
-//   display: flex;
-//   justify-content: flex-start;
-//   align-items: center;
-
-//   p {
-//     padding: 0 1rem;
-//   }
-// `;
-
-export const Styles = {
-  Row1,
-  Row2,
-  // TabMenu,
-  // Content,
-  Form,
-  Method,
-  InputRequest,
-  ButtonRequest,
-  // Menu,
-};

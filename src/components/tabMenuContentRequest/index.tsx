@@ -1,40 +1,35 @@
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
+import { TabMenuContentProps } from "../../types";
 import { menuRequestTitles } from "../../utils/tabMenuTitles";
 
+// Components
+import BodySection from "./bodySection";
+import HeadersSection from "./headersSection";
+import Unavailable from "../unavailable";
+
 // Styles
-import { Styles } from "./styles";
+import { Content } from "./styles";
 
-type TabContentProps = {
-  menu: string;
-};
-
-export default function TabMenuContentRequest({ menu }: TabContentProps) {
-  const [menuName, setMenuName] = useState("default");
-
-  useEffect(() => {
+export default function TabMenuContentRequest({ menu }: TabMenuContentProps) {
+  const element = useMemo(() => {
+    // console.log("render Tab Request");
     switch (menu) {
       case menuRequestTitles[0].text:
-        setMenuName(menuRequestTitles[0].text);
-        break;
+        return <BodySection />;
       case menuRequestTitles[1].text:
-        setMenuName(menuRequestTitles[1].text);
-        break;
+        // return <div>Headers here...</div>;
+        return <HeadersSection />;
       case menuRequestTitles[2].text:
-        setMenuName(menuRequestTitles[2].text);
-        break;
+        // return <div>Authorization here...</div>;
+        return <Unavailable />;
       case menuRequestTitles[3].text:
-        setMenuName(menuRequestTitles[3].text);
-        break;
+        // return <div>Query here...</div>;
+        return <Unavailable />;
       default:
-        setMenuName("default");
-        break;
+        return <Unavailable />;
+      // return <div>Sorry! Not Found...</div>;
     }
-    // console.log(menuName);
   }, [menu]);
 
-  return (
-    <Styles.Content>
-      <p>{menuName}</p>
-    </Styles.Content>
-  );
+  return <Content>{element}</Content>;
 }

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Footer = styled.footer`
+export const FooterContainer = styled.footer`
   height: 2.5rem;
   display: flex;
   justify-content: space-between;
@@ -10,6 +10,9 @@ const Footer = styled.footer`
   color: ${({ theme }) => theme.color};
 `;
 
-export const Styles = {
-  Footer,
-};
+export const Div = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+`;
