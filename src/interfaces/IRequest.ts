@@ -9,4 +9,5 @@ export interface IRequest {
   httpMethod: HttpMethods;
   bodyType: BodyTypes;
   bodyData: string;
+  isLoading: boolean;
 }

@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { colors } from "../../styles/colors";
-import Button from "../button";
+import { useThemeContext } from "../../hooks/useThemeContext";
+
+// Components
 import Input from "../input";
-import { Styles } from "./styles";
+import AddIcon from "../svgIcon/addIcon";
+
+// Styles
+import { InputGroup, Row1, Row2, WorkspaceContent } from "./styles";
+import { colors } from "../../styles/colors";
 
 export default function Workspace() {
+  const { state } = useThemeContext();
   const [filter, setFilter] = useState("");
 
   const { register, handleSubmit } = useForm();
@@ -16,7 +22,7 @@ export default function Workspace() {
 
   return (
     <>
-      <Styles.Row1>
+      <Row1>
         <div
           style={{
             display: "flex",
@@ -31,10 +37,10 @@ export default function Workspace() {
             <span style={{ color: colors.green, fontWeight: "600" }}>Dev</span>
           </p>
         </div>
-      </Styles.Row1>
+      </Row1>
 
-      <Styles.Row2>
-        <Styles.InputGroup>
+      <Row2>
+        <InputGroup>
           <div
             style={{
               display: "flex",
@@ -55,21 +61,21 @@ export default function Workspace() {
                 placeholder="Search"
                 onChange={(e) => setFilter(e.target.value)}
               />
-
-              <img
-                src="./icons/icon-add-circle.svg"
-                alt="add"
+              <AddIcon
                 width={36}
                 height={36}
+                fill={
+                  state.themeName === "dark" ? colors.softWhite : colors.darkTwo
+                }
               />
             </form>
           </div>
-        </Styles.InputGroup>
+        </InputGroup>
 
-        <Styles.Workspace>
+        <WorkspaceContent>
           <div style={{ padding: "1rem" }}>Workspace</div>
-        </Styles.Workspace>
-      </Styles.Row2>
+        </WorkspaceContent>
+      </Row2>
     </>
   );
 }

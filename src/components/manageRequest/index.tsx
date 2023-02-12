@@ -1,10 +1,13 @@
 import { AxiosResponse } from "axios";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { MenuAction } from "../../enums/MenuAction";
 import { menuRequestTitles } from "../../utils/tabMenuTitles";
-import { getRequestAction } from "../../redux/request/requestActions";
+import {
+  getRequestAction,
+  setIsLoading,
+} from "../../redux/request/requestActions";
 import axiosManager from "../../services/axiosManager";
 
 // Components
@@ -23,7 +26,9 @@ type FormDataRequest = {
 
 export default function ManageRequest() {
   const [url, setUrl] = useState("https://jsonplaceholder.typicode.com/posts");
+  // const [url, setUrl] = useState("");
   const { register, handleSubmit } = useForm<FormDataRequest>();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const dispatch = useDispatch();
 
@@ -35,17 +40,27 @@ export default function ManageRequest() {
     (rootReducer: any) => rootReducer.requestReducer
   );
 
+  const handleFocus = (e: any) => {
+    if (inputRef.current) {
+      inputRef.current.selectionEnd = inputRef.current.value.length;
+    }
+  };
+
   const onSubmit = async (data: FormDataRequest) => {
     try {
-      // console.log(data);
+      console.log(data);
+      dispatch(setIsLoading(true));
       const response = await axiosManager(httpMethod, data.url, bodyData);
 
       dispatch(getRequestAction(response as AxiosResponse));
 
-      console.log(response);
+      // console.log(response);
     } catch (error) {
+      dispatch(setIsLoading(false));
       dispatch(getRequestAction(error.response));
       console.error(error);
+    } finally {
+      dispatch(setIsLoading(false));
     }
   };
 
@@ -59,8 +74,12 @@ export default function ManageRequest() {
               {...register("url")}
               type={"text"}
               value={url}
+              placeholder={"https://api.example.com/v1/products"}
               onChange={(e) => setUrl(e.target.value)}
+              autoComplete={"off"}
               required={true}
+              onFocus={handleFocus}
+              // ref={inputRef}
             />
             <ButtonRequest type="submit">Send</ButtonRequest>
           </Form>

@@ -29,15 +29,15 @@ export const InputRequest = styled.input`
   background-color: ${({ theme }) => theme.backgroundSecondary};
   width: 100%;
   height: 100%;
-  padding: 0 0.625rem;
+  padding: 0 0.625rem 0 0;
   border: none;
 
-  &:focus,
-  &:focus-visible {
+  :focus,
+  :focus-visible {
     outline: none;
-    text-decoration: underline;
-    background-color: ${({ theme }) =>
-      theme.name === "dark" ? theme.colors.darkOne : theme.colors.softGray};
+    /* text-decoration: underline; */
+    /* background-color: ${({ theme }) =>
+      theme.name === "dark" ? theme.colors.darkOne : theme.colors.softGray}; */
   }
 `;
 
@@ -45,13 +45,14 @@ export const ButtonRequest = styled.button`
   width: max-content;
   height: 100%;
   font-size: 1rem;
+  font-weight: 600;
   background-color: ${({ theme }) => theme.colors.blue};
   color: ${({ theme }) => theme.colors.white};
   padding: 0.625rem 1.5rem;
   border: none;
   cursor: pointer;
 
-  &:hover {
+  :hover {
     opacity: 0.7;
   }
 `;

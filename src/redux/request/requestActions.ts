@@ -28,3 +28,10 @@ export const setBodyData = (data: string) => {
     payload: data,
   };
 };
+
+export const setIsLoading = (status: boolean) => {
+  return {
+    type: requestTypes.SET_IS_LOADING,
+    payload: status,
+  };
+};

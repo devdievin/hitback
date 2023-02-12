@@ -1,4 +1,3 @@
-import { AxiosHeaders } from "axios";
 import { useSelector } from "react-redux";
 import { MenuAction } from "../../enums/MenuAction";
 import { menuResponseTitles } from "../../utils/tabMenuTitles";
@@ -7,23 +6,24 @@ import { menuResponseTitles } from "../../utils/tabMenuTitles";
 import TabMenuComponent from "../tabMenuComponent";
 import TabMenuContentResponse from "../tabMenuContentResponse";
 import TagHttpCode from "../tagHttpCode";
+import Loading from "../loading";
 
 // Styles
-import { Styles } from "./styles";
+import { InfoContainer, Row1, Row2 } from "./styles";
 
 export default function ResponseInfo() {
   const { menuResponseSelected } = useSelector(
     (rootReducer: any) => rootReducer.tabMenuReducer
   );
 
-  const { headers, status } = useSelector(
+  const { headers, status, isLoading } = useSelector(
     (rootReducer: any) => rootReducer.requestReducer
   );
 
   return (
     <>
-      <Styles.Row1>
-        <Styles.InfoContainer>
+      <Row1>
+        <InfoContainer>
           <TagHttpCode code={status} />
           <p>
             {headers["request-duration"] ? headers["request-duration"] : "0ms"}
@@ -33,16 +33,17 @@ export default function ResponseInfo() {
               ? `${headers["content-length"]} bytes`
               : "0 bytes"}
           </p>
-        </Styles.InfoContainer>
-      </Styles.Row1>
-      <Styles.Row2>
+        </InfoContainer>
+      </Row1>
+      <Row2>
         <TabMenuComponent
           menus={menuResponseTitles}
           menuActionIn={MenuAction.RESPONSE}
         >
           <TabMenuContentResponse menu={menuResponseSelected.text} />
         </TabMenuComponent>
-      </Styles.Row2>
+      </Row2>
+      {isLoading && <Loading />}
     </>
   );
 }

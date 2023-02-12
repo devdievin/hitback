@@ -1,16 +1,20 @@
-type IconProps = {
+type DropdownIconProps = {
   width: string | number;
   height: string | number;
   fill: string;
 };
 
-export default function Icon({ width, height, fill }: IconProps) {
+export default function DropdownIcon({
+  width,
+  height,
+  fill,
+}: DropdownIconProps) {
   return (
     <svg
       width={width}
       height={height}
       viewBox="0 0 13 8"
-    //   fill="none"
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

@@ -1,27 +1,20 @@
 import styled from "styled-components";
 
-const Row1 = styled.div`
+export const Row1 = styled.div`
   grid-row: 1;
   height: 100%;
 `;
 
-const Row2 = styled.div`
+export const Row2 = styled.div`
   grid-row: 2;
   height: 100%;
 `;
 
-const InputGroup = styled.div`
+export const InputGroup = styled.div`
   height: 3rem;
   border-bottom: 0.0625rem solid ${({ theme }) => theme.borderColor};
 `;
 
-const Workspace = styled.div`
+export const WorkspaceContent = styled.div`
   height: calc(100% - 3rem);
 `;
-
-export const Styles = {
-  Row1,
-  Row2,
-  InputGroup,
-  Workspace,
-};

@@ -1,7 +1,11 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
+// Components
+import DisplayEmpty from "../../displayEmpty";
+
 // Styles
+import { colors } from "../../../styles/colors";
 import { Container, Key, Row, Value } from "./styles";
 
 export default function HeadersSection() {
@@ -13,12 +17,14 @@ export default function HeadersSection() {
     return Object.entries(headers as [string, string]);
   }, [headers]);
 
+  console.log(data);
+
   const key = 0;
   const value = 1;
 
   return (
     <Container>
-      {data &&
+      {data.length > 0 ? (
         data.map((item, index) => {
           return (
             <Row key={index}>
@@ -26,7 +32,10 @@ export default function HeadersSection() {
               <Value>{item[value]}</Value>
             </Row>
           );
-        })}
+        })
+      ) : (
+        <DisplayEmpty width={120} height={120} fill={colors.softGray} />
+      )}
     </Container>
   );
 }

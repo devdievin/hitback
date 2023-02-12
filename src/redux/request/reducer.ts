@@ -9,8 +9,9 @@ const INITIAL_STATE: IRequest = {
   headers: new AxiosHeaders(undefined),
   status: 100,
   httpMethod: HttpMethods.GET,
-  bodyType: BodyTypes.NONE,
+  bodyType: BodyTypes.JSON,
   bodyData: "",
+  isLoading: false,
 };
 
 const requestReducer = (state = INITIAL_STATE, action: any) => {
@@ -36,6 +37,11 @@ const requestReducer = (state = INITIAL_STATE, action: any) => {
       return {
         ...state,
         bodyData: action.payload,
+      };
+    case requestTypes.SET_IS_LOADING:
+      return {
+        ...state,
+        isLoading: action.payload,
       };
     default:
       return state;

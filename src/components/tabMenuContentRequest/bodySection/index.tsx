@@ -13,7 +13,7 @@ import NoneComponent from "./noneComponent";
 import PlainTextComponent from "./plainTextComponent";
 
 // Styles
-import { Styles } from "./styles";
+import { Container, InputGroup } from "./styles";
 
 export default function BodySection() {
   const dispatch = useDispatch();
@@ -40,11 +40,11 @@ export default function BodySection() {
   };
 
   return (
-    <Styles.Container>
-      <Styles.InputGroup>
+    <Container>
+      <InputGroup>
         <RadioButton
           id="radio1"
-          name="test"
+          name="bodyTypeRadio"
           label={BodyTypes.NONE}
           value={BodyTypes.NONE}
           checked={bodyType === BodyTypes.NONE}
@@ -52,7 +52,7 @@ export default function BodySection() {
         />
         <RadioButton
           id="radio2"
-          name="test"
+          name="bodyTypeRadio"
           label={BodyTypes.JSON}
           value={BodyTypes.JSON}
           checked={bodyType === BodyTypes.JSON}
@@ -60,15 +60,15 @@ export default function BodySection() {
         />
         <RadioButton
           id="radio3"
-          name="test"
+          name="bodyTypeRadio"
           label={BodyTypes.PLAIN}
           value={BodyTypes.PLAIN}
           checked={bodyType === BodyTypes.PLAIN}
           onChange={handleChange}
         />
-      </Styles.InputGroup>
+      </InputGroup>
 
       {element}
-    </Styles.Container>
+    </Container>
   );
 }

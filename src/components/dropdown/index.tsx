@@ -5,7 +5,7 @@ import { useThemeContext } from "../../hooks/useThemeContext";
 import { toggleDropMenuHttpMethod } from "../../redux/dropdownMenu/actionCreators";
 
 // Components
-import Icon from "../icon";
+import DropdownIcon from "../svgIcon/dropdownIcon";
 
 // Styles
 import { Container, DropButton, DropMenu, IconButton } from "./styles";
@@ -64,7 +64,7 @@ export default function Dropdown({ children }: DropdownProps) {
       <DropButton onClick={handleToggle} style={{ color: font_color }}>
         {httpMethod}
         <IconButton>
-          <Icon
+          <DropdownIcon
             width={14}
             height={8}
             fill={

@@ -6,6 +6,8 @@ const Section = styled.section`
   grid-template-rows: 3rem calc(100vh - (4rem + 2.5rem + 3rem)); // h-headers + h-footer + h-row1
   justify-content: center;
   align-items: center;
+  height: 100%;
+  position: relative;
 
   &:nth-child(2) {
     border-left: 0.0625rem solid ${({ theme }) => theme.borderColor};

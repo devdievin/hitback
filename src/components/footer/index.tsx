@@ -1,12 +1,31 @@
-import { Styles } from "./styles";
+import { useThemeContext } from "../../hooks/useThemeContext";
+
+// Components
+import HeartIcon from "../svgIcon/heartIcon";
+import SettingsIcon from "../svgIcon/settingsIcon";
+
+// Styles
+import { Div, FooterContainer } from "./styles";
+import { colors } from "../../styles/colors";
 
 export default function Footer() {
+  const { state } = useThemeContext();
+
   return (
-    <Styles.Footer>
-      <div>Preferences</div>
-      <div>
-        Made with <span>S2</span> by Dievin
-      </div>
-    </Styles.Footer>
+    <FooterContainer>
+      <Div>
+        <SettingsIcon
+          width={20}
+          height={20}
+          stroke={state.themeName === "dark" ? colors.white : colors.darkTwo}
+        />
+        Preferences
+      </Div>
+      <Div>
+        Made with
+        <HeartIcon width={20} height={20} fill={colors.blue} />
+        by Dievin
+      </Div>
+    </FooterContainer>
   );
 }
