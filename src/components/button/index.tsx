@@ -1,4 +1,4 @@
-import { Styles } from "./styles";
+import { ButtonComponent } from "./styles";
 
 type ButtonProps = {
   type: "button" | "submit" | "reset";
@@ -8,8 +8,8 @@ type ButtonProps = {
 
 export default function Button({ type, text, onClick }: ButtonProps) {
   return (
-    <Styles.Button type={type} onClick={onClick}>
+    <ButtonComponent type={type} onClick={onClick}>
       {text}
-    </Styles.Button>
+    </ButtonComponent>
   );
 }

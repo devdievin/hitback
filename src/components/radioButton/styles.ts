@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
   gap: 0.625rem;
 `;
 
-const Radio = styled.input`
+export const Radio = styled.input`
   -webkit-appearance: none;
   appearance: none;
   display: flex;
@@ -42,11 +42,6 @@ const Radio = styled.input`
   }
 `;
 
-const Label = styled.label<{ disabled?: boolean }>`
+export const Label = styled.label<{ disabled?: boolean }>`
   color: ${({ theme }) => theme.color};
 `;
-
-export const Styles = {
-  Radio,
-  Label,
-};

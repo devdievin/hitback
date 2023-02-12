@@ -1,11 +1,11 @@
-import { colors } from "../../styles/colors";
 import styled from "styled-components";
+import { colors } from "../../styles/colors";
 
-const Container = styled.div`
+export const Container = styled.div`
   height: 100%;
 `;
 
-const TabMenu = styled.div`
+export const TabMenu = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -14,11 +14,11 @@ const TabMenu = styled.div`
   border-bottom: 0.0625rem solid ${({ theme }) => theme.borderColor};
 `;
 
-const Content = styled.div`
+export const Content = styled.div`
   height: calc(100% - 3rem);
 `;
 
-const Item = styled.div`
+export const Item = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -36,7 +36,7 @@ const Item = styled.div`
   }
 `;
 
-const ItemActive = styled(Item)`
+export const ItemActive = styled(Item)`
   border-bottom: 0.0625rem solid ${({ theme }) => theme.backgroundSecondary};
 
   &:first-child {
@@ -48,11 +48,3 @@ const ItemActive = styled(Item)`
     border-right: 0.0625rem solid ${({ theme }) => theme.borderColor};
   }
 `;
-
-export const Styles = {
-  Container,
-  TabMenu,
-  Content,
-  Item,
-  ItemActive,
-};

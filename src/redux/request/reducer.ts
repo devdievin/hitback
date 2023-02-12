@@ -6,11 +6,12 @@ import requestTypes from "./requestTypes";
 
 const INITIAL_STATE: IRequest = {
   data: [],
-  headers: new AxiosHeaders(undefined),
+  headers: new AxiosHeaders({}),
   status: 100,
   httpMethod: HttpMethods.GET,
-  bodyType: BodyTypes.JSON,
+  bodyType: BodyTypes.NONE,
   bodyData: "",
+  requestHeaders: { contentType: null },
   isLoading: false,
 };
 
@@ -37,6 +38,11 @@ const requestReducer = (state = INITIAL_STATE, action: any) => {
       return {
         ...state,
         bodyData: action.payload,
+      };
+    case requestTypes.SET_REQUEST_HEADERS:
+      return {
+        ...state,
+        requestHeaders: action.payload,
       };
     case requestTypes.SET_IS_LOADING:
       return {

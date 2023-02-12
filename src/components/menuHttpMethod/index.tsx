@@ -54,9 +54,9 @@ export default function MenuHttpMethod() {
       >
         {HttpMethods.DEL}
       </MenuItem>
-      <MenuItem onClick={() => console.log("Custom click")}>
+      {/* <MenuItem onClick={() => console.log("Custom click")}>
         Custom Method
-      </MenuItem>
+      </MenuItem> */}
     </Container>
   );
 }

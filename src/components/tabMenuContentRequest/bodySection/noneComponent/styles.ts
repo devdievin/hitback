@@ -1,21 +1,21 @@
 import styled from "styled-components";
 import { colors } from "../../../../styles/colors";
 
-const Container = styled.div`
+export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
 `;
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   min-width: 300px;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 `;
 
-const Text = styled.p`
+export const Text = styled.p`
   color: ${({ theme }) =>
     theme.name === "dark" ? colors.lightGray : colors.darkThree};
   display: flex;
@@ -23,17 +23,10 @@ const Text = styled.p`
   align-items: center;
 `;
 
-const Tag = styled.span`
+export const Tag = styled.span`
   background-color: ${colors.darkTwo};
   color: ${({ theme }) =>
     theme.name === "dark" ? colors.lightGray : colors.softGray};
   padding: 0.5rem;
   border-radius: 0.25rem;
 `;
-
-export const Styles = {
-  Container,
-  Wrapper,
-  Text,
-  Tag,
-};

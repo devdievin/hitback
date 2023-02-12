@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useThemeContext } from "../../../hooks/useThemeContext";
-import { JsonViewer, JsonViewerTheme } from "@textea/json-viewer";
+import { JsonViewer } from "@textea/json-viewer";
 
 // Components
 import DisplayEmpty from "../../displayEmpty";
@@ -15,41 +15,6 @@ export default function ResponseSection() {
   const { data } = useSelector(
     (rootReducer: any) => rootReducer.requestReducer
   );
-
-  const dataTest = {
-    currency: "USD",
-    crypto: {
-      rank: 1,
-      symbol: "BTC",
-      name: "Bitcoin",
-      price: 22535.13,
-      variation: "−1.63%",
-      marketCap: "434.609B",
-    },
-    timestamp: 1675961428031,
-    nullValues: null,
-    nanValues: NaN,
-    undValues: undefined,
-    boolValues: true,
-    dateValue: new Date(),
-  };
-
-  const example = {
-    string: "this is a test string",
-    integer: 42,
-    array: [1, 2, 3, "test", NaN],
-    float: 3.14159,
-    undefined,
-    object: {
-      "first-child": true,
-      "second-child": false,
-      "last-child": null,
-    },
-    string_number: "1234",
-    date: new Date(),
-  };
-
-  // console.log(data);
 
   const theme = {
     base00: state.themeName === "dark" ? colors.darkThree : colors.softWhite, // background-color
@@ -74,8 +39,6 @@ export default function ResponseSection() {
 
   return (
     <Container>
-      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
-
       {data.length === 0 || data === undefined || data === null ? (
         <DisplayEmpty width={120} height={120} fill={colors.softGray} />
       ) : (

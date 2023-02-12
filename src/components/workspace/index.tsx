@@ -7,7 +7,16 @@ import Input from "../input";
 import AddIcon from "../svgIcon/addIcon";
 
 // Styles
-import { InputGroup, Row1, Row2, WorkspaceContent } from "./styles";
+import {
+  ButtonAdd,
+  EnvGroup,
+  EnvStatus,
+  InputContainer,
+  InputGroup,
+  Row1,
+  Row2,
+  WorkspaceContent,
+} from "./styles";
 import { colors } from "../../styles/colors";
 
 export default function Workspace() {
@@ -16,51 +25,28 @@ export default function Workspace() {
 
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-  };
-
   return (
     <>
       <Row1>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            // gap: "1rem",
-            padding: "0 1rem",
-            height: "100%",
-          }}
-        >
-          <p>
-            Environment:{" "}
-            <span style={{ color: colors.green, fontWeight: "600" }}>Dev</span>
-          </p>
-        </div>
+        <EnvGroup>
+          Environment:
+          <EnvStatus>Dev</EnvStatus>
+        </EnvGroup>
       </Row1>
 
       <Row2>
-        <InputGroup>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "1rem",
-              padding: "0 1rem",
-            }}
-          >
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              style={{ display: "flex", width: "100%", gap: "1rem" }}
-            >
-              <Input
-                register={register}
-                type={"text"}
-                name={"filter"}
-                value={filter}
-                placeholder="Search"
-                onChange={(e) => setFilter(e.target.value)}
-              />
+        <InputContainer>
+          <InputGroup>
+            <Input
+              register={register}
+              type={"text"}
+              name={"filter"}
+              value={filter}
+              placeholder="Search"
+              onChange={(e) => setFilter(e.target.value)}
+              disabled={true}
+            />
+            <ButtonAdd>
               <AddIcon
                 width={36}
                 height={36}
@@ -68,12 +54,12 @@ export default function Workspace() {
                   state.themeName === "dark" ? colors.softWhite : colors.darkTwo
                 }
               />
-            </form>
-          </div>
-        </InputGroup>
+            </ButtonAdd>
+          </InputGroup>
+        </InputContainer>
 
         <WorkspaceContent>
-          <div style={{ padding: "1rem" }}>Workspace</div>
+          Workspace
         </WorkspaceContent>
       </Row2>
     </>

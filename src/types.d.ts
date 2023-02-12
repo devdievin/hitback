@@ -10,3 +10,7 @@ type MenuTitleType = {
 type TabMenuContentProps = {
   menu: string;
 };
+
+type RequestHeadersType = {
+  contentType: string | null;
+};

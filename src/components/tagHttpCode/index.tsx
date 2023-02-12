@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 
 // Styles
-import { Styles } from "./styles";
+import {
+  TagHttpCode100,
+  TagHttpCode200,
+  TagHttpCode400,
+  TagHttpCode500,
+} from "./styles";
 
 type TagHttpCodeProps = {
   code: number;
@@ -13,19 +18,19 @@ export default function TagHttpCode({ code }: TagHttpCodeProps) {
   useEffect(() => {
     switch (true) {
       case code >= 200 && code < 300:
-        setElement(<Styles.TagHttpCode200>{code}</Styles.TagHttpCode200>);
+        setElement(<TagHttpCode200>{code}</TagHttpCode200>);
         break;
       case code >= 400 && code < 500:
-        setElement(<Styles.TagHttpCode400>{code}</Styles.TagHttpCode400>);
+        setElement(<TagHttpCode400>{code}</TagHttpCode400>);
         break;
       case code >= 500 && code < 600:
-        setElement(<Styles.TagHttpCode500>{code}</Styles.TagHttpCode500>);
+        setElement(<TagHttpCode500>{code}</TagHttpCode500>);
         break;
       default:
-        setElement(<Styles.TagHttpCode100>{code}</Styles.TagHttpCode100>);
+        setElement(<TagHttpCode100>{code}</TagHttpCode100>);
         break;
     }
-    console.log("TAG rendered");
+    // console.log("TAG rendered");
   }, [code]);
 
   return element;

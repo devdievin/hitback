@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
-import { Styles } from "./styles";
+import { SectionContainer } from "./styles";
 
 type SectionProps = {
   children: ReactNode;
 };
 
 export default function Section({ children }: SectionProps) {
-  return <Styles.Section>{children}</Styles.Section>;
+  return <SectionContainer>{children}</SectionContainer>;
 }

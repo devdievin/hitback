@@ -7,7 +7,7 @@ import {
 } from "../../redux/tabMenu/actionCreators";
 
 //Styles
-import { Styles } from "./styles";
+import { Container, Content, Item, ItemActive, TabMenu } from "./styles";
 
 type TabMenuComponentProps = {
   menus: MenuTitleType[];
@@ -32,22 +32,22 @@ export default function TabMenuComponent({
   };
 
   return (
-    <Styles.Container>
-      <Styles.TabMenu>
+    <Container>
+      <TabMenu>
         {menus.map((menu) =>
           menu.id === menuRequestSelected.id ||
           menu.id === menuResponseSelected.id ? (
-            <Styles.ItemActive key={menu.id} onClick={() => toggleMenu(menu)}>
+            <ItemActive key={menu.id} onClick={() => toggleMenu(menu)}>
               <span>{menu.text}</span>
-            </Styles.ItemActive>
+            </ItemActive>
           ) : (
-            <Styles.Item key={menu.id} onClick={() => toggleMenu(menu)}>
+            <Item key={menu.id} onClick={() => toggleMenu(menu)}>
               <span>{menu.text}</span>
-            </Styles.Item>
+            </Item>
           )
         )}
-      </Styles.TabMenu>
-      <Styles.Content>{children}</Styles.Content>
-    </Styles.Container>
+      </TabMenu>
+      <Content>{children}</Content>
+    </Container>
   );
 }

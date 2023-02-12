@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Header = styled.header`
+export const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,12 +10,7 @@ const Header = styled.header`
   color: ${({ theme }) => theme.color};
 `;
 
-const Logo = styled.h1`
+export const Logo = styled.h1`
   font-size: 1.75rem;
   color: ${({ theme }) => theme.colors.blue};
 `;
-
-export const Styles = {
-  Header,
-  Logo,
-};

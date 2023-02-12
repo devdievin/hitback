@@ -17,7 +17,7 @@ export default function HeadersSection() {
     return Object.entries(headers as [string, string]);
   }, [headers]);
 
-  console.log(data);
+  // console.log(data);
 
   const key = 0;
   const value = 1;

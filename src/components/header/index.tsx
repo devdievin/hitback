@@ -1,25 +1,24 @@
-import { useEffect } from "react";
 import { useThemeContext } from "../../hooks/useThemeContext";
-import Button from "../button";
-import { Styles } from "./styles";
+
+// Components
+import ToggleTheme from "../toggleTheme";
+
+// Styles
+import { HeaderContainer, Logo } from "./styles";
 
 export default function Header() {
-  const { state, toggleTheme } = useThemeContext();
-
-  useEffect(() => {
-    console.log({ state });
-  }, [state]);
+  const { toggleTheme } = useThemeContext();
 
   return (
-    <Styles.Header>
-      <Styles.Logo>Logo</Styles.Logo>
+    <HeaderContainer>
+      <Logo>Logo</Logo>
       <div>
         <p>Hitback/My Workspace</p>
       </div>
 
       <div>
-        <Button type="button" text="Toggle" onClick={toggleTheme} />
+        <ToggleTheme onClick={toggleTheme} />
       </div>
-    </Styles.Header>
+    </HeaderContainer>
   );
 }

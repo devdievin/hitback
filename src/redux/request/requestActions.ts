@@ -1,4 +1,5 @@
-import { AxiosResponse } from "axios";
+import { AxiosHeaders, AxiosResponse } from "axios";
+import { RequestHeadersType } from "../../types";
 import requestTypes from "./requestTypes";
 
 export const getRequestAction = (payload: AxiosResponse) => {
@@ -26,6 +27,13 @@ export const setBodyData = (data: string) => {
   return {
     type: requestTypes.SET_BODY_DATA,
     payload: data,
+  };
+};
+
+export const setHeaders = (headers: RequestHeadersType) => {
+  return {
+    type: requestTypes.SET_REQUEST_HEADERS,
+    payload: headers,
   };
 };
 

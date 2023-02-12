@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Button = styled.button`
+export const ButtonComponent = styled.button`
   font-size: 1rem;
   padding: 0.625rem 2rem;
   border-color: transparent;
@@ -16,7 +16,3 @@ const Button = styled.button`
     outline: none;
   }
 `;
-
-export const Styles = {
-  Button,
-};

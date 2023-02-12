@@ -25,8 +25,8 @@ type FormDataRequest = {
 };
 
 export default function ManageRequest() {
-  const [url, setUrl] = useState("https://jsonplaceholder.typicode.com/posts");
-  // const [url, setUrl] = useState("");
+  // const [url, setUrl] = useState("https://jsonplaceholder.typicode.com/posts");
+  const [url, setUrl] = useState("");
   const { register, handleSubmit } = useForm<FormDataRequest>();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -49,6 +49,7 @@ export default function ManageRequest() {
   const onSubmit = async (data: FormDataRequest) => {
     try {
       console.log(data);
+      // console.log(bodyData);
       dispatch(setIsLoading(true));
       const response = await axiosManager(httpMethod, data.url, bodyData);
 

@@ -1,4 +1,4 @@
-import { Styles, Wrapper } from "./styles";
+import { Label, Radio, Wrapper } from "./styles";
 
 type RadioButtonProps = {
   id: string;
@@ -23,7 +23,7 @@ export default function RadioButton({
 }: RadioButtonProps) {
   return (
     <Wrapper>
-      <Styles.Radio
+      <Radio
         type="radio"
         id={id}
         name={name}
@@ -33,7 +33,7 @@ export default function RadioButton({
         onClick={onClick}
         onChange={onChange}
       />
-      <Styles.Label htmlFor={id}>{label}</Styles.Label>
+      <Label htmlFor={id}>{label}</Label>
     </Wrapper>
   );
 }

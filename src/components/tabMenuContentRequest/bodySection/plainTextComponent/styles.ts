@@ -1,12 +1,8 @@
 import styled from "styled-components";
 
-const Container = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 2.25rem);
 `;
-
-export const Styles = {
-  Container,
-};

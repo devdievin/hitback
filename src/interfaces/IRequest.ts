@@ -1,6 +1,7 @@
 import { AxiosHeaders } from "axios";
 import { BodyTypes } from "../enums/BodyTypes";
 import { HttpMethods } from "../enums/HttpMethods";
+import { RequestHeadersType } from "../types";
 
 export interface IRequest {
   data: [];
@@ -9,5 +10,6 @@ export interface IRequest {
   httpMethod: HttpMethods;
   bodyType: BodyTypes;
   bodyData: string;
+  requestHeaders: RequestHeadersType;
   isLoading: boolean;
 }

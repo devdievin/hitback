@@ -44,5 +44,5 @@ export const DropMenu = styled.div`
   color: ${({ theme }) => theme.color};
   border: 1px solid ${({ theme }) => theme.borderColor};
   border-radius: 0.375rem;
-  /* padding: 0.625rem; */
+  z-index: 10;
 `;
