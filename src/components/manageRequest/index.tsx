@@ -27,6 +27,7 @@ type FormDataRequest = {
 export default function ManageRequest() {
   // const [url, setUrl] = useState("https://jsonplaceholder.typicode.com/posts");
   const [url, setUrl] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { register, handleSubmit } = useForm<FormDataRequest>();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -69,7 +70,9 @@ export default function ManageRequest() {
     <>
       <Row1>
         <Wrapper>
-          <Dropdown children={<MenuHttpMethod />} />
+          <Dropdown isOpen={isDropdownOpen} setIsOpen={setIsDropdownOpen}>
+            <MenuHttpMethod isOpenOnSelect={setIsDropdownOpen} />
+          </Dropdown>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <InputRequest
               {...register("url")}

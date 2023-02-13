@@ -1,5 +1,6 @@
 import dropdownMenuTypes from "./actionTypes";
 
+// ############# REMOVER TODO O REDUCER DROPDOWN MENU
 const INITIAL_STATE = {
   isOpenDropHttpMethod: false,
   isOpenDropEnv: false,
