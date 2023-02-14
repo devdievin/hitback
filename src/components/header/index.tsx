@@ -1,24 +1,22 @@
 import { useThemeContext } from "../../hooks/useThemeContext";
 
 // Components
+import LogoIcon from "../svgIcon/logoIcon";
 import ToggleTheme from "../toggleTheme";
 
 // Styles
-import { HeaderContainer, Logo } from "./styles";
+import { HeaderContainer, TextWorkspace } from "./styles";
 
 export default function Header() {
   const { toggleTheme } = useThemeContext();
 
   return (
     <HeaderContainer>
-      <Logo>Logo</Logo>
-      <div>
-        <p>Hitback/My Workspace</p>
-      </div>
+      <LogoIcon width={46} height={46} />
 
-      <div>
-        <ToggleTheme onClick={toggleTheme} />
-      </div>
+      <TextWorkspace>Hitback/My Workspace</TextWorkspace>
+
+      <ToggleTheme onClick={toggleTheme} />
     </HeaderContainer>
   );
 }

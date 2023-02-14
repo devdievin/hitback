@@ -10,7 +10,7 @@ export const HeaderContainer = styled.header`
   color: ${({ theme }) => theme.color};
 `;
 
-export const Logo = styled.h1`
-  font-size: 1.75rem;
-  color: ${({ theme }) => theme.colors.blue};
+export const TextWorkspace = styled.p`
+  font-size: 1.25rem;
+  font-weight: 500;
 `;

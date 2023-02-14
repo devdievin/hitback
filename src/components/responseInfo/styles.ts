@@ -18,5 +18,5 @@ export const InfoContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 0.875rem;
+  gap: 2rem;
 `;

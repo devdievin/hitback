@@ -1,13 +1,18 @@
 import { useDispatch } from "react-redux";
 import { HttpMethods } from "../../enums/HttpMethods";
 import { setHttpMethod } from "../../redux/request/requestActions";
-import { toggleDropMenuHttpMethod } from "../../redux/dropdownMenu/actionCreators";
 
 // Styles
 import { Container, MenuItem } from "./styles";
 import { colors } from "../../styles/colors";
 
-export default function MenuHttpMethod() {
+type MenuHttpMethodProps = {
+  isOpenOnSelect: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function MenuHttpMethod({
+  isOpenOnSelect,
+}: MenuHttpMethodProps) {
   const dispatch = useDispatch();
 
   const toggleHttpMethod = (method: string) => {
@@ -25,7 +30,7 @@ export default function MenuHttpMethod() {
         dispatch(setHttpMethod(method));
         break;
     }
-    dispatch(toggleDropMenuHttpMethod(false));
+    isOpenOnSelect(false);
   };
 
   return (

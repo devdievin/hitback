@@ -1,8 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { HttpMethods } from "../../enums/HttpMethods";
 import { useThemeContext } from "../../hooks/useThemeContext";
-import { toggleDropMenuHttpMethod } from "../../redux/dropdownMenu/actionCreators";
 
 // Components
 import DropdownIcon from "../svgIcon/dropdownIcon";
@@ -12,32 +11,38 @@ import { Container, DropButton, DropMenu, IconButton } from "./styles";
 import { colors } from "../../styles/colors";
 
 type DropdownProps = {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   children: JSX.Element;
 };
 
-export default function Dropdown({ children }: DropdownProps) {
-  const dispatch = useDispatch();
+export default function Dropdown({
+  isOpen,
+  setIsOpen,
+  children,
+}: DropdownProps) {
   const { state } = useThemeContext();
+  const [colorText, setColorText] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const { httpMethod } = useSelector(
     (rootReducer: any) => rootReducer.requestReducer
   );
 
-  const { isOpenDropHttpMethod } = useSelector(
-    (rootReducer: any) => rootReducer.dropdownReducer
-  );
-
-  const font_color = useMemo(() => {
+  useEffect(() => {
     switch (httpMethod) {
       case HttpMethods.GET:
-        return colors.blue;
+        setColorText(colors.blue);
+        break;
       case HttpMethods.POST:
-        return colors.green;
+        setColorText(colors.green);
+        break;
       case HttpMethods.PUT:
-        return colors.yellow;
+        setColorText(colors.yellow);
+        break;
       case HttpMethods.DEL:
-        return colors.red;
+        setColorText(colors.red);
+        break;
     }
   }, [httpMethod]);
 
@@ -51,17 +56,17 @@ export default function Dropdown({ children }: DropdownProps) {
 
   const handleClick = (event: any) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      dispatch(toggleDropMenuHttpMethod(false));
+      setIsOpen(false);
     }
   };
 
   const handleToggle = () => {
-    dispatch(toggleDropMenuHttpMethod(!isOpenDropHttpMethod));
+    setIsOpen((prevState) => !prevState);
   };
 
   return (
     <Container ref={dropdownRef}>
-      <DropButton onClick={handleToggle} style={{ color: font_color }}>
+      <DropButton onClick={handleToggle} style={{ color: colorText }}>
         {httpMethod}
         <IconButton>
           <DropdownIcon
@@ -73,7 +78,7 @@ export default function Dropdown({ children }: DropdownProps) {
           />
         </IconButton>
       </DropButton>
-      {isOpenDropHttpMethod && <DropMenu>{children}</DropMenu>}
+      {isOpen && <DropMenu>{children}</DropMenu>}
     </Container>
   );
 }

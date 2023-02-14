@@ -1,24 +1,30 @@
 import axios from "axios";
 import { HttpMethods } from "../enums/HttpMethods";
 
-export default async function axiosManager(
+type AxiosConfigProps = {
+  method: string;
+  url: string;
+  data?: any;
+};
+
+export default async function apiRequest(
   httpMethod: string,
   url: string,
-  data?: any
+  bodyData: string
 ) {
-  const axios_instance = axios.create({
+  const api = axios.create({
     headers: { Accept: "application/json", "Content-Type": "application/json" },
     timeout: 10000,
     maxContentLength: Infinity,
     maxBodyLength: Infinity,
   });
 
-  axios_instance.interceptors.request.use((config) => {
+  api.interceptors.request.use((config) => {
     config.headers["request-startTime"] = new Date().getTime();
     return config;
   });
 
-  axios_instance.interceptors.response.use(
+  api.interceptors.response.use(
     (response) => {
       const startTime = response.config.headers["request-startTime"];
       const endTime = new Date().getTime();
@@ -42,14 +48,24 @@ export default async function axiosManager(
     return `${duration}ms`;
   };
 
-  switch (httpMethod) {
-    case HttpMethods.GET:
-      return await axios_instance.get(url);
-    case HttpMethods.POST:
-      return await axios_instance.post(url, JSON.parse(data));
-    case HttpMethods.PUT:
-      return await axios_instance.put(url, JSON.parse(data));
-    case HttpMethods.DEL:
-      return await axios_instance.delete(url);
+  let config: AxiosConfigProps = {
+    method: httpMethod,
+    url: url,
+  };
+
+  if (httpMethod === HttpMethods.POST || httpMethod === HttpMethods.PUT) {
+    config = {
+      method: httpMethod,
+      url: url,
+      data: JSON.parse(bodyData),
+    };
   }
+
+  // console.log("METHOD:", httpMethod);
+  // console.log("URL:", url);
+  // console.log("bodyData:", bodyData);
+
+  // console.log("CONFIG:", config);
+
+  return await api(config);
 }
