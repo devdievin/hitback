@@ -3,8 +3,8 @@ import { colors } from "../../styles/colors";
 
 export const TagCodeHttp = styled.span`
   font-weight: 500;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.125rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.25rem;
 `;
 
 export const TagHttpCode100 = styled(TagCodeHttp)`

@@ -1,4 +1,3 @@
-import { AxiosResponse } from "axios";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -8,7 +7,7 @@ import {
   getRequestAction,
   setIsLoading,
 } from "../../redux/request/requestActions";
-import axiosManager from "../../services/axiosManager";
+import apiRequest from "../../services/apiRequest";
 
 // Components
 import TabMenuComponent from "../tabMenuComponent";
@@ -49,12 +48,13 @@ export default function ManageRequest() {
 
   const onSubmit = async (data: FormDataRequest) => {
     try {
+      const { url } = data;
       console.log(data);
       // console.log(bodyData);
       dispatch(setIsLoading(true));
-      const response = await axiosManager(httpMethod, data.url, bodyData);
+      const response = await apiRequest(httpMethod, url, bodyData);
 
-      dispatch(getRequestAction(response as AxiosResponse));
+      dispatch(getRequestAction(response));
 
       // console.log(response);
     } catch (error) {
@@ -66,6 +66,10 @@ export default function ManageRequest() {
     }
   };
 
+  const checkKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
+    if (e.code === "Enter") e.preventDefault();
+  };
+
   return (
     <>
       <Row1>
@@ -73,7 +77,7 @@ export default function ManageRequest() {
           <Dropdown isOpen={isDropdownOpen} setIsOpen={setIsDropdownOpen}>
             <MenuHttpMethod isOpenOnSelect={setIsDropdownOpen} />
           </Dropdown>
-          <Form onSubmit={handleSubmit(onSubmit)}>
+          <Form onSubmit={handleSubmit(onSubmit)} onKeyDown={checkKeyDown}>
             <InputRequest
               {...register("url")}
               type={"text"}

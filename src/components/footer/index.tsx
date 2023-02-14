@@ -12,7 +12,7 @@ import { colors } from "../../styles/colors";
 
 export default function Footer() {
   const { state } = useThemeContext();
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
     console.log("open modal");

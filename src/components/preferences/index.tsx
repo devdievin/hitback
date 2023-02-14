@@ -7,7 +7,13 @@ import Unavailable from "../unavailable";
 
 // Styles
 import { colors } from "../../styles/colors";
-import { Container, Modal, ModalHeader, ModalContent } from "./styles";
+import {
+  Container,
+  Modal,
+  ModalHeader,
+  ModalContent,
+  ButtonClose,
+} from "./styles";
 
 type PreferencesProps = {
   setModalStatus: React.Dispatch<React.SetStateAction<boolean>>;
@@ -45,7 +51,7 @@ export default function Preferences({ setModalStatus }: PreferencesProps) {
       <Modal ref={modalRef}>
         <ModalHeader>
           Preferences
-          <div onClick={handleClose}>
+          <ButtonClose onClick={handleClose}>
             <CloseIcon
               width={28}
               height={28}
@@ -53,7 +59,7 @@ export default function Preferences({ setModalStatus }: PreferencesProps) {
                 state.themeName === "dark" ? colors.softWhite : colors.darkTwo
               }
             />
-          </div>
+          </ButtonClose>
         </ModalHeader>
         <ModalContent>
           <Unavailable />

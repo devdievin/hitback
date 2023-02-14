@@ -3,14 +3,12 @@ import styled, { keyframes } from "styled-components";
 
 export const fadeToBottom = keyframes`
   from {
-    /* top: -80px; */
-    transform: translateY(-80px);
+    transform: translateY(-5rem); // 80px
     visibility: hidden;
     opacity: 0;
   }
   
   to {
-    /* top: 0; */
     transform: translateY(0);
     visibility: visible;
     opacity: 1;
@@ -45,6 +43,14 @@ export const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+export const ButtonClose = styled.div`
+  cursor: pointer;
+
+  :hover {
+    opacity: 0.7;
+  }
 `;
 
 export const ModalContent = styled.div`
