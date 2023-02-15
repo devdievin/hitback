@@ -7,7 +7,9 @@ import {
   getRequestAction,
   setIsLoading,
 } from "../../redux/request/requestActions";
+import { showErrorAction } from "../../redux/errors/actionCreators";
 import apiRequest from "../../services/apiRequest";
+import checkDataIntegrity from "../../services/checkDataIntegrity";
 
 // Components
 import TabMenuComponent from "../tabMenuComponent";
@@ -40,6 +42,10 @@ export default function ManageRequest() {
     (rootReducer: any) => rootReducer.requestReducer
   );
 
+  // const { status } = useSelector(
+  //   (rootReducer: any) => rootReducer.errorReducer
+  // );
+
   const handleFocus = (e: any) => {
     if (inputRef.current) {
       inputRef.current.selectionEnd = inputRef.current.value.length;
@@ -49,14 +55,19 @@ export default function ManageRequest() {
   const onSubmit = async (data: FormDataRequest) => {
     try {
       const { url } = data;
-      console.log(data);
       // console.log(bodyData);
+
+      if (!checkDataIntegrity(httpMethod, bodyData)) {
+        dispatch(
+          showErrorAction({ status: true, message: "Invalid request body!" })
+        );
+        return;
+      }
+
       dispatch(setIsLoading(true));
+
       const response = await apiRequest(httpMethod, url, bodyData);
-
       dispatch(getRequestAction(response));
-
-      // console.log(response);
     } catch (error) {
       dispatch(setIsLoading(false));
       dispatch(getRequestAction(error.response));

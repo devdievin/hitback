@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Main = styled.main`
+  position: relative;
   height: calc(100vh - (4rem + 2.5rem));
   display: grid;
   grid-template-columns: 30% 35% 35%;

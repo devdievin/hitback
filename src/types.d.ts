@@ -14,3 +14,8 @@ type TabMenuContentProps = {
 type RequestHeadersType = {
   contentType: string | null;
 };
+
+type ErrorContextType = {
+  isError: boolean;
+  message: string;
+};
