@@ -18,7 +18,7 @@ export default function JsonComponent() {
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
-    console.log(value);
+    // console.log(value);
     dispatch(setBodyData(value));
   };
 

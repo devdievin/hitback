@@ -10,6 +10,7 @@ type CodeEditorProps = {
   padding?: number | undefined;
   theme?: "dark" | "light";
   style?: React.CSSProperties;
+  required?: boolean;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
@@ -30,6 +31,7 @@ export default function CodeEditorComponent({
       "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
     overflowY: "auto",
   },
+  required = true,
   onChange,
 }: CodeEditorProps) {
   return (
@@ -41,6 +43,7 @@ export default function CodeEditorComponent({
       onChange={onChange}
       padding={padding}
       style={style}
+      required={required}
     />
   );
 }
