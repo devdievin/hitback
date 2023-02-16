@@ -15,7 +15,7 @@ export default function Footer() {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
-    console.log("open modal");
+    // console.log("open modal");
     setIsOpen(true);
   };
 
