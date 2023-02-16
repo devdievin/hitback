@@ -1,8 +1,9 @@
 import { colors } from "./../../styles/colors";
+import { footerSize } from "../../styles/sizes";
 import styled from "styled-components";
 
 export const FooterContainer = styled.footer`
-  height: 2.5rem;
+  height: ${footerSize.height};
   display: flex;
   justify-content: space-between;
   align-items: center;

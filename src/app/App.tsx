@@ -15,6 +15,7 @@ import Error from "../components/error";
 import { GlobalStyles } from "../styles/global";
 import { theme } from "../styles/theme";
 import { Main } from "./styles";
+import { useEffect } from "react";
 
 function App() {
   const { state } = useThemeContext();
@@ -24,6 +25,29 @@ function App() {
   );
 
   const currentTheme = (theme as any)[state.themeName];
+
+  useEffect(() => {
+    function handleKeyDown(event: any) {
+      if (event.ctrlKey && event.key === "c") {
+        console.log("Ctrl + C pressed");
+        // Do something when "Ctrl + C" is pressed
+      }
+
+      if (event.ctrlKey && event.key === "Enter") {
+        console.log("Ctrl + Enter pressed");
+      }
+
+      if (event.ctrlKey && event.key === "y") {
+        console.log("Ctrl + y pressed");
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   return (
     <ThemeProvider theme={currentTheme}>

@@ -1,5 +1,6 @@
 import { colors } from "./../../styles/colors";
 import styled, { keyframes } from "styled-components";
+import { device } from "../../styles/sizes";
 
 export const fadeToBottom = keyframes`
   from {
@@ -36,6 +37,10 @@ export const Modal = styled.div`
   padding: 1rem;
   transition: all 0.5s linear;
   animation: ${fadeToBottom} 0.3s linear both;
+
+  @media only screen and (${device.mobile}) {
+    width: 90%;
+  }
 `;
 
 export const ModalHeader = styled.div`

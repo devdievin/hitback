@@ -35,14 +35,13 @@ export default function Preferences({ setModalStatus }: PreferencesProps) {
 
   const handleClick = (event: any) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
-      console.log("Close modal");
-
+      // console.log("Close modal");
       setModalStatus(false);
     }
   };
 
   const handleClose = () => {
-    console.log("Close button modal");
+    // console.log("Close button modal");
     setModalStatus(false);
   };
 

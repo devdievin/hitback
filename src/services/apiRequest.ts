@@ -17,6 +17,11 @@ export default async function apiRequest(
 ) {
   const api = axios.create({
     // headers: { Accept: "application/json", "Content-Type": "application/json" },
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "*",
+      "Access-Control-Allow-Credentials": "true",
+    },
     timeout: 10000,
     maxContentLength: Infinity,
     maxBodyLength: Infinity,
