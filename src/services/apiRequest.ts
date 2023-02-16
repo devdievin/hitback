@@ -1,19 +1,22 @@
 import axios from "axios";
 import { HttpMethods } from "../enums/HttpMethods";
+import { RequestHeadersType } from "../types";
 
 type AxiosConfigProps = {
   method: string;
   url: string;
   data?: any;
+  headers: {};
 };
 
 export default async function apiRequest(
   httpMethod: string,
   url: string,
-  bodyData: string
+  bodyData: string,
+  headers: RequestHeadersType
 ) {
   const api = axios.create({
-    headers: { Accept: "application/json", "Content-Type": "application/json" },
+    // headers: { Accept: "application/json", "Content-Type": "application/json" },
     timeout: 10000,
     maxContentLength: Infinity,
     maxBodyLength: Infinity,
@@ -51,6 +54,7 @@ export default async function apiRequest(
   let config: AxiosConfigProps = {
     method: httpMethod,
     url: url,
+    headers: headers,
   };
 
   if (httpMethod === HttpMethods.POST || httpMethod === HttpMethods.PUT) {
@@ -58,12 +62,9 @@ export default async function apiRequest(
       method: httpMethod,
       url: url,
       data: JSON.parse(bodyData),
+      headers: headers,
     };
   }
-
-  // console.log("METHOD:", httpMethod);
-  // console.log("URL:", url);
-  // console.log("bodyData:", bodyData);
 
   // console.log("CONFIG:", config);
 

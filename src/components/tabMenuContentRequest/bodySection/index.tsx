@@ -19,7 +19,7 @@ import { Container, InputGroup } from "./styles";
 
 export default function BodySection() {
   const dispatch = useDispatch();
-  const { bodyType } = useSelector(
+  const { bodyType, requestHeaders } = useSelector(
     (rootReducer: any) => rootReducer.requestReducer
   );
 
@@ -42,17 +42,23 @@ export default function BodySection() {
 
     switch (value) {
       case BodyTypes.NONE:
-        dispatch(setHeaders({ contentType: null }));
+        dispatch(setHeaders({ ...requestHeaders, contentType: undefined }));
         break;
       case BodyTypes.JSON:
         dispatch(
           setHeaders({
+            ...requestHeaders,
             contentType: ContentTypes.Application_JSON,
           })
         );
         break;
       case BodyTypes.PLAIN:
-        dispatch(setHeaders({ contentType: ContentTypes.Text_Plain }));
+        dispatch(
+          setHeaders({
+            ...requestHeaders,
+            contentType: ContentTypes.Text_Plain,
+          })
+        );
         break;
     }
   };
