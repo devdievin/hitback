@@ -12,7 +12,11 @@ type TabMenuContentProps = {
 };
 
 type RequestHeadersType = {
-  contentType: string | null;
+  contentType: string | undefined;
+  authorization: string | undefined;
+  accept: string | undefined;
+  cacheControl: string | undefined;
+  userAgent: string | undefined;
 };
 
 type ErrorContextType = {

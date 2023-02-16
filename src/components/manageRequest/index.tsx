@@ -38,7 +38,7 @@ export default function ManageRequest() {
     (rootReducer: any) => rootReducer.tabMenuReducer
   );
 
-  const { httpMethod, bodyData } = useSelector(
+  const { httpMethod, bodyData, requestHeaders } = useSelector(
     (rootReducer: any) => rootReducer.requestReducer
   );
 
@@ -56,6 +56,7 @@ export default function ManageRequest() {
     try {
       const { url } = data;
       // console.log(bodyData);
+      console.log("Request Headers:", requestHeaders);
 
       if (!checkDataIntegrity(httpMethod, bodyData)) {
         dispatch(
@@ -66,7 +67,12 @@ export default function ManageRequest() {
 
       dispatch(setIsLoading(true));
 
-      const response = await apiRequest(httpMethod, url, bodyData);
+      const response = await apiRequest(
+        httpMethod,
+        url,
+        bodyData,
+        requestHeaders
+      );
       dispatch(getRequestAction(response));
     } catch (error) {
       dispatch(setIsLoading(false));

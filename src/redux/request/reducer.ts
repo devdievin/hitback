@@ -11,7 +11,13 @@ const INITIAL_STATE: IRequest = {
   httpMethod: HttpMethods.GET,
   bodyType: BodyTypes.NONE,
   bodyData: "",
-  requestHeaders: { contentType: null },
+  requestHeaders: {
+    contentType: undefined,
+    authorization: undefined,
+    accept: "application/json",
+    cacheControl: "no-cache",
+    userAgent: undefined,
+  },
   isLoading: false,
 };
 
