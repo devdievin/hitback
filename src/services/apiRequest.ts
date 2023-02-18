@@ -1,77 +1,57 @@
-import axios from "axios";
 import { HttpMethods } from "../enums/HttpMethods";
-import { RequestHeadersType } from "../types";
-
-type AxiosConfigProps = {
-  method: string;
-  url: string;
-  data?: any;
-  headers: {};
-};
+import { HitbackHeaders, IHitbackResponse } from "../types";
+import { formatResponseDuration } from "../utils/formatter";
 
 export default async function apiRequest(
   httpMethod: string,
   url: string,
   bodyData: string,
-  headers: RequestHeadersType
+  headers: HitbackHeaders
 ) {
-  const api = axios.create({
-    // headers: { Accept: "application/json", "Content-Type": "application/json" },
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "*",
-      "Access-Control-Allow-Credentials": "true",
-    },
-    timeout: 10000,
-    maxContentLength: Infinity,
-    maxBodyLength: Infinity,
-  });
+  async function hitback(url: string, options?: RequestInit) {
+    const startTime = performance.now();
+    const response = await fetch(url, options);
+    const endTime = performance.now();
+    const duration = endTime - startTime;
+    const responseCustomHeader = new Response(response.body, response);
+    responseCustomHeader.headers.set(
+      "X-Request-Duration",
+      formatResponseDuration(duration)
+    );
 
-  api.interceptors.request.use((config) => {
-    config.headers["request-startTime"] = new Date().getTime();
-    return config;
-  });
+    return await fetchToAxios(responseCustomHeader);
+  }
 
-  api.interceptors.response.use(
-    (response) => {
-      const startTime = response.config.headers["request-startTime"];
-      const endTime = new Date().getTime();
-      const duration = endTime - startTime;
-      response.headers["request-duration"] = formatResponseDuration(duration);
-      return response;
-    }
-    // (error) => {
-    //   return Promise.reject(error);
-    // }
-  );
+  async function fetchToAxios<T>(
+    fetchResponse: Response
+  ): Promise<IHitbackResponse> {
+    const data = await fetchResponse.json();
+    const status = fetchResponse.status;
+    const statusText = fetchResponse.statusText;
+    const headers: Record<string, string> = {};
+    fetchResponse.headers.forEach((value, name) => {
+      headers[name] = value;
+    });
+    const config: Record<string, unknown> = {};
+    return { data, status, statusText, headers, config };
+  }
 
-  const formatResponseDuration = (duration: number): string => {
-    const millisecond = 1000;
-    const milliseconds_limit = 2000;
-
-    if (duration > milliseconds_limit) {
-      return `${(duration / millisecond).toFixed(2)}s`;
-    }
-
-    return `${duration}ms`;
-  };
-
-  let config: AxiosConfigProps = {
+  let options: RequestInit = {
     method: httpMethod,
-    url: url,
     headers: headers,
+    mode: "cors",
+    cache: "default",
   };
 
   if (httpMethod === HttpMethods.POST || httpMethod === HttpMethods.PUT) {
-    config = {
+    options = {
       method: httpMethod,
-      url: url,
-      data: JSON.parse(bodyData),
       headers: headers,
+      mode: "cors",
+      cache: "default",
+      body: JSON.stringify(JSON.parse(bodyData)),
     };
   }
 
-  // console.log("CONFIG:", config);
-
-  return await api(config);
+  return hitback(url, options);
 }

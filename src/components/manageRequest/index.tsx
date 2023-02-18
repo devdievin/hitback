@@ -26,7 +26,6 @@ type FormDataRequest = {
 };
 
 export default function ManageRequest() {
-  // const [url, setUrl] = useState("https://jsonplaceholder.typicode.com/posts");
   const [url, setUrl] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { register, handleSubmit } = useForm<FormDataRequest>();
@@ -42,10 +41,6 @@ export default function ManageRequest() {
     (rootReducer: any) => rootReducer.requestReducer
   );
 
-  // const { status } = useSelector(
-  //   (rootReducer: any) => rootReducer.errorReducer
-  // );
-
   const handleFocus = (e: any) => {
     if (inputRef.current) {
       inputRef.current.selectionEnd = inputRef.current.value.length;
@@ -55,8 +50,7 @@ export default function ManageRequest() {
   const onSubmit = async (data: FormDataRequest) => {
     try {
       const { url } = data;
-      // console.log(bodyData);
-      console.log("Request Headers:", requestHeaders);
+      // console.log("Request Headers:", requestHeaders);
 
       if (!checkDataIntegrity(httpMethod, bodyData)) {
         dispatch(
@@ -73,11 +67,13 @@ export default function ManageRequest() {
         bodyData,
         requestHeaders
       );
+      // console.log(response);
+
       dispatch(getRequestAction(response));
     } catch (error) {
       dispatch(setIsLoading(false));
       dispatch(getRequestAction(error.response));
-      console.error(error);
+      console.error("CATCH Error:", error);
     } finally {
       dispatch(setIsLoading(false));
     }

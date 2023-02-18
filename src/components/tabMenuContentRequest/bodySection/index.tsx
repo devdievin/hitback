@@ -1,11 +1,11 @@
 import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BodyTypes } from "../../../enums/BodyTypes";
-import { ContentTypes } from "../../../enums/ContentTypes";
+// import { ContentTypes } from "../../../enums/ContentTypes";
 import {
   setBodyData,
   setBodyType,
-  setHeaders,
+  setHitbackHeaders,
 } from "../../../redux/request/requestActions";
 
 // Components
@@ -42,21 +42,26 @@ export default function BodySection() {
 
     switch (value) {
       case BodyTypes.NONE:
-        dispatch(setHeaders({ ...requestHeaders, contentType: undefined }));
+        dispatch(
+          setHitbackHeaders({
+            ...requestHeaders,
+            "Content-Type": null,
+          })
+        );
         break;
       case BodyTypes.JSON:
         dispatch(
-          setHeaders({
+          setHitbackHeaders({
             ...requestHeaders,
-            contentType: ContentTypes.Application_JSON,
+            "Content-Type": "application/json",
           })
         );
         break;
       case BodyTypes.PLAIN:
         dispatch(
-          setHeaders({
+          setHitbackHeaders({
             ...requestHeaders,
-            contentType: ContentTypes.Text_Plain,
+            "Content-Type": "text/plain",
           })
         );
         break;

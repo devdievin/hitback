@@ -23,3 +23,41 @@ type ErrorContextType = {
   isError: boolean;
   message: string;
 };
+
+// ## Hitback Request/Response Types
+type HitbackHeaderValue = string | string[] | number | boolean | null | unknown;
+
+type HitbackHeaders = HeadersInit & {
+  [key: string]: HitbackHeaderValue;
+};
+
+type HitbackRequestHeadersList =
+  | "Accept"
+  | "Content-Length"
+  | "User-Agent"
+  | "Content-Encoding"
+  | "Authorization";
+
+type ContentType =
+  | "text/html"
+  | "text/plain"
+  | "multipart/form-data"
+  | "application/json"
+  | "application/x-www-form-urlencoded"
+  | "application/octet-stream";
+
+export type HitbackRequestHeaders = Partial<
+  HitbackHeaders & {
+    [Key in HitbackRequestHeadersList]: HitbackHeaderValue;
+  } & {
+    "Content-Type": ContentType;
+  }
+>;
+
+export interface IHitbackResponse {
+  data: any;
+  status: number;
+  statusText: string;
+  headers: HitbackHeaders;
+  config: Record<string, unknown>;
+}

@@ -26,7 +26,9 @@ export default function ResponseInfo() {
         <InfoContainer>
           <TagHttpCode code={status} />
           <p>
-            {headers["request-duration"] ? headers["request-duration"] : "0ms"}
+            {headers["x-request-duration"]
+              ? headers["x-request-duration"]
+              : "0ms"}
           </p>
           <p>
             {headers["content-length"]

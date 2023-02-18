@@ -1,4 +1,3 @@
-import { AxiosHeaders } from "axios";
 import { BodyTypes } from "../../enums/BodyTypes";
 import { HttpMethods } from "../../enums/HttpMethods";
 import { IRequest } from "../../interfaces/IRequest";
@@ -6,17 +5,14 @@ import requestTypes from "./requestTypes";
 
 const INITIAL_STATE: IRequest = {
   data: [],
-  headers: new AxiosHeaders({}),
+  headers: {},
   status: 100,
   httpMethod: HttpMethods.GET,
   bodyType: BodyTypes.NONE,
   bodyData: "",
   requestHeaders: {
-    contentType: undefined,
-    authorization: undefined,
-    accept: "application/json",
-    cacheControl: "no-cache",
-    userAgent: undefined,
+    Accept: "application/json",
+    "Content-Type": "application/json",
   },
   isLoading: false,
 };
