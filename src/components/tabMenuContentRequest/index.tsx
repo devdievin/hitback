@@ -5,6 +5,7 @@ import { menuRequestTitles } from "../../utils/tabMenuTitles";
 // Components
 import BodySection from "./bodySection";
 import HeadersSection from "./headersSection";
+import AuthorizationSection from "./authorizationSection";
 import Unavailable from "../unavailable";
 
 // Styles
@@ -17,11 +18,9 @@ export default function TabMenuContentRequest({ menu }: TabMenuContentProps) {
       case menuRequestTitles[0].text:
         return <BodySection />;
       case menuRequestTitles[1].text:
-        // return <div>Headers here...</div>;
         return <HeadersSection />;
       case menuRequestTitles[2].text:
-        // return <div>Authorization here...</div>;
-        return <Unavailable />;
+        return <AuthorizationSection />;
       case menuRequestTitles[3].text:
         // return <div>Query here...</div>;
         return <Unavailable />;

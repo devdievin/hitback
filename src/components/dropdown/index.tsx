@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { HttpMethods } from "../../enums/HttpMethods";
 import { useThemeContext } from "../../hooks/useThemeContext";
 
@@ -11,12 +11,14 @@ import { Container, DropButton, DropMenu, IconButton } from "./styles";
 import { colors } from "../../styles/colors";
 
 type DropdownProps = {
+  text: string;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   children: JSX.Element;
 };
 
 export default function Dropdown({
+  text,
   isOpen,
   setIsOpen,
   children,
@@ -25,12 +27,12 @@ export default function Dropdown({
   const [colorText, setColorText] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const { httpMethod } = useSelector(
-    (rootReducer: any) => rootReducer.requestReducer
-  );
+  // const { httpMethod } = useSelector(
+  //   (rootReducer: any) => rootReducer.requestReducer
+  // );
 
   useEffect(() => {
-    switch (httpMethod) {
+    switch (text) {
       case HttpMethods.GET:
         setColorText(colors.blue);
         break;
@@ -43,8 +45,13 @@ export default function Dropdown({
       case HttpMethods.DEL:
         setColorText(colors.red);
         break;
+      default:
+        const defaultTextColor =
+          state.themeName === "dark" ? colors.softWhite : colors.darkThree;
+        setColorText(defaultTextColor);
+        break;
     }
-  }, [httpMethod]);
+  }, [text, state.themeName]);
 
   useEffect(() => {
     document.addEventListener("click", handleClick);
@@ -67,7 +74,7 @@ export default function Dropdown({
   return (
     <Container ref={dropdownRef}>
       <DropButton onClick={handleToggle} style={{ color: colorText }}>
-        {httpMethod}
+        {text}
         <IconButton>
           <DropdownIcon
             width={14}

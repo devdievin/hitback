@@ -12,14 +12,26 @@ export const Item = styled.div`
   color: ${({ theme }) =>
     theme.name === "dark" ? colors.softWhite : colors.darkThree};
   border-radius: 0.375rem;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 2.5rem;
+  grid-template-rows: auto;
   justify-content: space-between;
   align-items: center;
 `;
 
-export const Key = styled.span``;
+export const Key = styled.span`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
+`;
 
-export const Value = styled.span``;
+export const Value = styled.span`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
+`;
 
 export const HeaderGroup = styled.div`
   display: flex;

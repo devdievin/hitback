@@ -1,11 +1,8 @@
 // import { AxiosHeaders } from "axios";
+import { AuthorizationTypes } from "../enums/AuthorizationTypes";
 import { BodyTypes } from "../enums/BodyTypes";
 import { HttpMethods } from "../enums/HttpMethods";
-import {
-  HitbackHeaders,
-  HitbackRequestHeaders,
-  // RequestHeadersType,
-} from "../types";
+import { HitbackHeaders, HitbackRequestHeaders } from "../types";
 
 export interface IRequest {
   data: [];
@@ -14,6 +11,8 @@ export interface IRequest {
   httpMethod: HttpMethods;
   bodyType: BodyTypes;
   bodyData: string;
+  authorizationType: AuthorizationTypes;
+  authorizationToken: string;
   requestHeaders: HitbackRequestHeaders;
   isLoading: boolean;
 }

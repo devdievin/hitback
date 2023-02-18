@@ -50,7 +50,7 @@ export default function ManageRequest() {
   const onSubmit = async (data: FormDataRequest) => {
     try {
       const { url } = data;
-      // console.log("Request Headers:", requestHeaders);
+      console.log("Request Headers:", requestHeaders);
 
       if (!checkDataIntegrity(httpMethod, bodyData)) {
         dispatch(
@@ -87,7 +87,7 @@ export default function ManageRequest() {
     <>
       <Row1>
         <Wrapper>
-          <Dropdown isOpen={isDropdownOpen} setIsOpen={setIsDropdownOpen}>
+          <Dropdown text={httpMethod} isOpen={isDropdownOpen} setIsOpen={setIsDropdownOpen}>
             <MenuHttpMethod isOpenOnSelect={setIsDropdownOpen} />
           </Dropdown>
           <Form onSubmit={handleSubmit(onSubmit)} onKeyDown={checkKeyDown}>

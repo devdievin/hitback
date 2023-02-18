@@ -1,3 +1,4 @@
+import { AuthorizationTypes } from "../../enums/AuthorizationTypes";
 import { HitbackRequestHeaders, IHitbackResponse } from "../../types";
 import requestTypes from "./requestTypes";
 
@@ -19,6 +20,20 @@ export const setBodyType = (type: string) => {
   return {
     type: requestTypes.SET_BODY_TYPE,
     payload: type,
+  };
+};
+
+export const setAuthorizationType = (type: AuthorizationTypes) => {
+  return {
+    type: requestTypes.SET_AUTHORIZATION_TYPE,
+    payload: type,
+  };
+};
+
+export const setAuthorizationToken = (token: string) => {
+  return {
+    type: requestTypes.SET_AUTHORIZATION_TOKEN,
+    payload: token,
   };
 };
 

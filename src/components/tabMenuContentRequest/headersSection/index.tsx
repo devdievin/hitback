@@ -45,7 +45,7 @@ export default function HeadersSection() {
     // console.log(requestHeaders);
     // console.log("change Headers");
     const content_header = Object.entries(requestHeaders).filter(
-      (header) => header[value] !== null
+      (header) => header[value] !== null && header[key] !== "Authorization"
     );
 
     setHeadersList(content_header as HeadersArray);
@@ -79,14 +79,12 @@ export default function HeadersSection() {
   };
 
   const removeHeader = (key: string) => {
-    // console.log("KEY:", key);
     const result = Object.entries(requestHeaders)
       .filter((item) => item[0] !== key)
       .reduce((result: HitbackHeaders, item) => {
         result[item[0]] = item[1];
         return result;
       }, {});
-    // console.log("->", result);
     dispatch(setHitbackHeaders(result as HitbackRequestHeaders));
   };
 
