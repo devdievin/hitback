@@ -9,13 +9,12 @@ export const Container = styled.div`
 `;
 
 export const Item = styled.div`
-  /* background-color: ${colors.darkTwo}; */
-  color: ${colors.softWhite};
+  color: ${({ theme }) =>
+    theme.name === "dark" ? colors.softWhite : colors.darkThree};
   border-radius: 0.375rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 1rem 0; */
 `;
 
 export const Key = styled.span``;

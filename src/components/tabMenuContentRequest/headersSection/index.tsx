@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { HitbackHeaders, HitbackRequestHeaders } from "../../../types";
+import { setHitbackHeaders } from "../../../redux/request/requestActions";
 
 // Components
 import OkIcon from "../../svgIcon/okIcon";
@@ -25,6 +27,7 @@ type NewHeaderProps = {
 };
 
 export default function HeadersSection() {
+  const dispatch = useDispatch();
   const [headersList, setHeadersList] = useState<HeadersArray>([]);
   const [newHeader, setNewHeader] = useState<NewHeaderProps>({
     nameHeader: "",
@@ -39,10 +42,12 @@ export default function HeadersSection() {
   const value = 1;
 
   useEffect(() => {
-    console.log("change Headers");
+    // console.log(requestHeaders);
+    // console.log("change Headers");
     const content_header = Object.entries(requestHeaders).filter(
-      (header) => header[key] === "contentType" && header[value] !== undefined
+      (header) => header[value] !== null
     );
+
     setHeadersList(content_header as HeadersArray);
   }, [requestHeaders]);
 
@@ -61,19 +66,28 @@ export default function HeadersSection() {
   };
 
   const saveNewHeader = () => {
-    // console.log(headersList);
-    if (newHeader.nameHeader !== "" && newHeader.value !== "") {
-      setHeadersList((prevState) => [
-        ...prevState,
-        [newHeader.nameHeader, newHeader.value],
-      ]);
+    const { nameHeader, value } = newHeader;
+    if (nameHeader !== "" && value !== "") {
+      dispatch(
+        setHitbackHeaders({
+          ...requestHeaders,
+          [nameHeader]: value,
+        })
+      );
       setNewHeader({ nameHeader: "", value: "" });
     }
   };
 
-  const removeHeader = (ind: number) => {
-    const result = headersList.filter((item, index) => index !== ind);
-    setHeadersList(result);
+  const removeHeader = (key: string) => {
+    // console.log("KEY:", key);
+    const result = Object.entries(requestHeaders)
+      .filter((item) => item[0] !== key)
+      .reduce((result: HitbackHeaders, item) => {
+        result[item[0]] = item[1];
+        return result;
+      }, {});
+    // console.log("->", result);
+    dispatch(setHitbackHeaders(result as HitbackRequestHeaders));
   };
 
   return (
@@ -83,7 +97,7 @@ export default function HeadersSection() {
           <Item key={index}>
             <Key>{item[key]}</Key>
             <Value>{item[value]}</Value>
-            <Button onClick={() => removeHeader(index)}>
+            <Button onClick={() => removeHeader(item[key])}>
               <TrashIcon width={17} height={19} fill={colors.darkGray} />
             </Button>
           </Item>

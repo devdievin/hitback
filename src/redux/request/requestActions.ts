@@ -1,8 +1,7 @@
-import { AxiosHeaders, AxiosResponse } from "axios";
-import { RequestHeadersType } from "../../types";
+import { HitbackRequestHeaders, IHitbackResponse } from "../../types";
 import requestTypes from "./requestTypes";
 
-export const getRequestAction = (payload: AxiosResponse) => {
+export const getRequestAction = (payload: IHitbackResponse) => {
   return {
     type: requestTypes.SEND,
     payload,
@@ -30,7 +29,7 @@ export const setBodyData = (data: string) => {
   };
 };
 
-export const setHeaders = (headers: RequestHeadersType) => {
+export const setHitbackHeaders = (headers: HitbackRequestHeaders) => {
   return {
     type: requestTypes.SET_REQUEST_HEADERS,
     payload: headers,
