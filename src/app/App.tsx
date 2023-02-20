@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import { useThemeContext } from "../hooks/useThemeContext";
 import { useSelector } from "react-redux";
@@ -16,7 +17,6 @@ import Error from "../components/error";
 import { GlobalStyles } from "../styles/global";
 import { theme } from "../styles/theme";
 import { Main } from "./styles";
-import { useEffect } from "react";
 
 function App() {
   const { state } = useThemeContext();

@@ -5,10 +5,10 @@ export default function NoneComponent() {
     <Container>
       <Wrapper>
         <Text>
-          Change Environment <Tag>Ctrl + E</Tag>
+          Another Command <Tag>Ctrl + ???</Tag>
         </Text>
         <Text>
-          Send Request <Tag>Ctrl + Enter</Tag>
+          Another Command <Tag>Ctrl + ???</Tag>
         </Text>
         <Text>
           Another Command <Tag>Ctrl + ???</Tag>

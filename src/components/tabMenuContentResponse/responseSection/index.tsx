@@ -32,7 +32,7 @@ export default function ResponseSection() {
     base09: currentTheme === "dark" ? colors.softWhite : colors.darkThree, // color String value
     base0A: "gray", // unknown
     base0B: colors.red, // color Float value
-    base0C: colors.yellow, // color Object index
+    base0C: colors.tomato, // color Object index
     base0D: currentTheme === "dark" ? colors.lightGray : colors.darkGray, // color Date value
     base0E: colors.softWhite, // color Boolean value
     base0F: colors.blue, // color Int value

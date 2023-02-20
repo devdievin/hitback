@@ -10,7 +10,7 @@ export const GlobalStyles = createGlobalStyle`
   body {
     height: 100%;
     font-family: 'Inter', sans-serif;
-    transition: all 0.50s linear;
+    /* transition: all 0.50s linear; */
   }
   `;
 

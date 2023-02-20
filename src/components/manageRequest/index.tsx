@@ -21,7 +21,6 @@ import MenuHttpMethod from "../menuHttpMethod";
 // Styles
 import { Row1, InputRequest, ButtonRequest, Row2, Form } from "./styles";
 import { Wrapper } from "../../styles/global";
-import { IHitbackResponse } from "../../types";
 
 type FormDataRequest = {
   url: string;
@@ -49,7 +48,7 @@ export default function ManageRequest() {
     }
   };
 
-  const onSubmit = async (data: FormDataRequest) => {
+  const onSubmitRequest = async (data: FormDataRequest) => {
     try {
       const { url } = data;
       // console.log("Request Headers:", requestHeaders);
@@ -96,7 +95,10 @@ export default function ManageRequest() {
           >
             <MenuHttpMethod isOpenOnSelect={setIsDropdownOpen} />
           </Dropdown>
-          <Form onSubmit={handleSubmit(onSubmit)} onKeyDown={checkKeyDown}>
+          <Form
+            onSubmit={handleSubmit(onSubmitRequest)}
+            onKeyDown={checkKeyDown}
+          >
             <InputRequest
               {...register("url")}
               type={"text"}

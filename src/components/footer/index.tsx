@@ -7,7 +7,7 @@ import SettingsIcon from "../svgIcon/settingsIcon";
 import Preferences from "../preferences";
 
 // Styles
-import { ButtonPreferences, Div, FooterContainer } from "./styles";
+import { ButtonPreferences, Div, FooterContainer, Link } from "./styles";
 import { colors } from "../../styles/colors";
 
 export default function Footer() {
@@ -32,7 +32,14 @@ export default function Footer() {
       <Div>
         Made with
         <HeartIcon width={20} height={20} fill={colors.blue} />
-        by Dievin
+        by{" "}
+        <Link
+          href="https://dievanodantas.netlify.app"
+          target={"_blank"}
+          referrerPolicy={"no-referrer"}
+        >
+          Dievin
+        </Link>
       </Div>
       {isOpen && <Preferences setModalStatus={setIsOpen} />}
     </FooterContainer>

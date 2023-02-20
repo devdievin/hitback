@@ -25,7 +25,7 @@ export default function CodeEditorComponent({
     height: "100%",
     borderRadius: "0.375rem",
     fontSize: 14,
-    backgroundColor: theme === "dark" ? colors.darkOne : colors.softGray,
+    backgroundColor: theme === "dark" ? colors.darkOne : colors.pacificGray,
     color: theme === "dark" ? colors.softWhite : colors.darkTwo,
     fontFamily:
       "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
