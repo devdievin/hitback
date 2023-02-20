@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useThemeContext } from "../../../hooks/useThemeContext";
 import { JsonViewer } from "@textea/json-viewer";
+import { RootReducer } from "../../../redux/rootReducer";
 
 // Components
 import DisplayEmpty from "../../displayEmpty";
@@ -13,7 +14,7 @@ export default function ResponseSection() {
   const { state } = useThemeContext();
 
   const { data } = useSelector(
-    (rootReducer: any) => rootReducer.requestReducer
+    (rootReducer: RootReducer) => rootReducer.requestReducer
   );
 
   const currentTheme = state.themeName;

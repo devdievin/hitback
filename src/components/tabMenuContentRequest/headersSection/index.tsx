@@ -18,6 +18,7 @@ import {
   Key,
   Value,
 } from "./styles";
+import { RootReducer } from "../../../redux/rootReducer";
 
 type HeadersArray = [key: string, value: string][];
 
@@ -35,7 +36,7 @@ export default function HeadersSection() {
   });
 
   const { requestHeaders } = useSelector(
-    (rootReducer: any) => rootReducer.requestReducer
+    (rootReducer: RootReducer) => rootReducer.requestReducer
   );
 
   const key = 0;

@@ -1,10 +1,10 @@
 import { AuthorizationTypes } from "../../enums/AuthorizationTypes";
 import { BodyTypes } from "../../enums/BodyTypes";
 import { HttpMethods } from "../../enums/HttpMethods";
-import { IRequest } from "../../interfaces/IRequest";
+import { RequestState, StandardAction } from "../../types";
 import requestTypes from "./requestTypes";
 
-const INITIAL_STATE: IRequest = {
+const INITIAL_STATE: RequestState = {
   data: [],
   headers: {},
   status: 100,
@@ -20,7 +20,10 @@ const INITIAL_STATE: IRequest = {
   isLoading: false,
 };
 
-const requestReducer = (state = INITIAL_STATE, action: any) => {
+const requestReducer = (
+  state = INITIAL_STATE,
+  action: StandardAction
+): RequestState => {
   switch (action.type) {
     case requestTypes.SEND:
       return {

@@ -6,6 +6,7 @@ import {
   setAuthorizationType,
   setHitbackHeaders,
 } from "../../../redux/request/requestActions";
+import { RootReducer } from "../../../redux/rootReducer";
 
 // Components
 import Dropdown from "../../dropdown";
@@ -27,7 +28,7 @@ export default function AuthorizationSection() {
   const [isOpen, setIsOpen] = useState(false);
 
   const { authorizationType, authorizationToken, requestHeaders } = useSelector(
-    (rootReducer: any) => rootReducer.requestReducer
+    (rootReducer: RootReducer) => rootReducer.requestReducer
   );
 
   const handleMenuItemSelect = (item: AuthorizationTypes) => {

@@ -1,12 +1,12 @@
 import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BodyTypes } from "../../../enums/BodyTypes";
-// import { ContentTypes } from "../../../enums/ContentTypes";
 import {
   setBodyData,
   setBodyType,
   setHitbackHeaders,
 } from "../../../redux/request/requestActions";
+import { RootReducer } from "../../../redux/rootReducer";
 
 // Components
 import RadioButton from "../../radioButton";
@@ -20,7 +20,7 @@ import { Container, InputGroup } from "./styles";
 export default function BodySection() {
   const dispatch = useDispatch();
   const { bodyType, requestHeaders } = useSelector(
-    (rootReducer: any) => rootReducer.requestReducer
+    (rootReducer: RootReducer) => rootReducer.requestReducer
   );
 
   const element = useMemo(() => {
@@ -45,7 +45,7 @@ export default function BodySection() {
         dispatch(
           setHitbackHeaders({
             ...requestHeaders,
-            "Content-Type": null,
+            "Content-Type": undefined,
           })
         );
         break;

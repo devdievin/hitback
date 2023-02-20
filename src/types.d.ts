@@ -2,6 +2,43 @@ import { INITIAL_STATE } from "./contexts/ThemeContext";
 
 type InitialStateType = typeof INITIAL_STATE;
 
+type StandardAction = {
+  type: string;
+  payload: any;
+};
+
+type RequestState = {
+  data: [];
+  headers: HitbackHeaders;
+  status: number;
+  httpMethod: HttpMethods;
+  bodyType: BodyTypes;
+  bodyData: string;
+  authorizationType: AuthorizationTypes;
+  authorizationToken: string;
+  requestHeaders: HitbackRequestHeaders;
+  isLoading: boolean;
+};
+
+type ModalState = {
+  modalIsOpen: boolean;
+};
+
+type ErrorState = {
+  status: boolean;
+  message: string;
+};
+
+type DropdownState = {
+  isOpenDropHttpMethod: boolean;
+  isOpenDropEnv: boolean;
+};
+
+type TabMenuState = {
+  menuRequestSelected: MenuTitleType;
+  menuResponseSelected: MenuTitleType;
+};
+
 type MenuTitleType = {
   id: string;
   text: string;
@@ -28,7 +65,7 @@ type ErrorContextType = {
 type HitbackHeaderValue = string | string[] | number | boolean | null | unknown;
 
 type HitbackHeaders = HeadersInit & {
-  [key: string]: HitbackHeaderValue;
+  [key: string]: any;
 };
 
 type HitbackRequestHeadersList =

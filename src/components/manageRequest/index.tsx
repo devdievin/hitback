@@ -10,6 +10,7 @@ import {
 import { showErrorAction } from "../../redux/errors/actionCreators";
 import apiRequest from "../../services/apiRequest";
 import checkDataIntegrity from "../../services/checkDataIntegrity";
+import { RootReducer } from "../../redux/rootReducer";
 
 // Components
 import TabMenuComponent from "../tabMenuComponent";
@@ -34,11 +35,11 @@ export default function ManageRequest() {
   const dispatch = useDispatch();
 
   const { menuRequestSelected } = useSelector(
-    (rootReducer: any) => rootReducer.tabMenuReducer
+    (rootReducer: RootReducer) => rootReducer.tabMenuReducer
   );
 
   const { httpMethod, bodyData, requestHeaders } = useSelector(
-    (rootReducer: any) => rootReducer.requestReducer
+    (rootReducer: RootReducer) => rootReducer.requestReducer
   );
 
   const handleFocus = (e: any) => {
@@ -87,7 +88,11 @@ export default function ManageRequest() {
     <>
       <Row1>
         <Wrapper>
-          <Dropdown text={httpMethod} isOpen={isDropdownOpen} setIsOpen={setIsDropdownOpen}>
+          <Dropdown
+            text={httpMethod}
+            isOpen={isDropdownOpen}
+            setIsOpen={setIsDropdownOpen}
+          >
             <MenuHttpMethod isOpenOnSelect={setIsDropdownOpen} />
           </Dropdown>
           <Form onSubmit={handleSubmit(onSubmit)} onKeyDown={checkKeyDown}>
