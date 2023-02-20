@@ -1,12 +1,16 @@
 import { HttpMethods } from "../enums/HttpMethods";
-import { HitbackHeaders, IHitbackResponse } from "../types";
+import {
+  HitbackHeaders,
+  HitbackRequestHeaders,
+  IHitbackResponse,
+} from "../types";
 import { formatResponseDuration } from "../utils/formatter";
 
 export default async function apiRequest(
   httpMethod: string,
   url: string,
   bodyData: string,
-  headers: HitbackHeaders
+  headers: HitbackRequestHeaders
 ) {
   async function hitback(url: string, options?: RequestInit) {
     const startTime = performance.now();
@@ -38,7 +42,7 @@ export default async function apiRequest(
 
   let options: RequestInit = {
     method: httpMethod,
-    headers: headers,
+    headers: headers as HitbackHeaders,
     mode: "cors",
     cache: "default",
   };
@@ -46,7 +50,7 @@ export default async function apiRequest(
   if (httpMethod === HttpMethods.POST || httpMethod === HttpMethods.PUT) {
     options = {
       method: httpMethod,
-      headers: headers,
+      headers: headers as HitbackHeaders,
       mode: "cors",
       cache: "default",
       body: JSON.stringify(JSON.parse(bodyData)),

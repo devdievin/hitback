@@ -1,6 +1,7 @@
 import { ThemeProvider } from "styled-components";
 import { useThemeContext } from "../hooks/useThemeContext";
 import { useSelector } from "react-redux";
+import { RootReducer } from "../redux/rootReducer";
 
 // Components
 import Header from "../components/header";
@@ -20,8 +21,8 @@ import { useEffect } from "react";
 function App() {
   const { state } = useThemeContext();
 
-  const { errorState } = useSelector(
-    (rootReducer: any) => rootReducer.errorReducer
+  const { status, message } = useSelector(
+    (rootReducer: RootReducer) => rootReducer.errorReducer
   );
 
   const currentTheme = (theme as any)[state.themeName];
@@ -64,7 +65,7 @@ function App() {
           <Section>
             <ResponseInfo />
           </Section>
-          {errorState.status && <Error message={errorState.message} />}
+          {status && <Error message={message} />}
         </Main>
         <Footer />
       </div>

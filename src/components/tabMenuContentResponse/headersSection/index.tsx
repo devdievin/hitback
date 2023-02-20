@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
+import { RootReducer } from "../../../redux/rootReducer";
 
 // Components
 import DisplayEmpty from "../../displayEmpty";
@@ -10,11 +11,11 @@ import { Container, Key, Row, Value } from "./styles";
 
 export default function HeadersSection() {
   const { headers } = useSelector(
-    (rootReducer: any) => rootReducer.requestReducer
+    (rootReducer: RootReducer) => rootReducer.requestReducer
   );
 
   const data = useMemo(() => {
-    return Object.entries(headers as [string, string]);
+    return Object.entries(headers);
   }, [headers]);
 
   // console.log(data);

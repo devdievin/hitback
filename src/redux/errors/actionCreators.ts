@@ -1,8 +1,9 @@
+import { ErrorState } from "../../types";
 import errorsActionTypes from "./actionTypes";
 
-export const showErrorAction = (payload: any) => {
+export const showErrorAction = ({ status, message }: ErrorState) => {
   return {
     type: errorsActionTypes.SHOW_ERROR,
-    payload: payload,
+    payload: { status, message },
   };
 };

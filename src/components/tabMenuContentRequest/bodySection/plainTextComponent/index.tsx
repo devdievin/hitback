@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useThemeContext } from "../../../../hooks/useThemeContext";
 import { setBodyData } from "../../../../redux/request/requestActions";
+import { RootReducer } from "../../../../redux/rootReducer";
 
 // Components
 import CodeEditorComponent from "../../../codeEditor";
@@ -14,7 +15,7 @@ export default function PlainTextComponent() {
   const dispatch = useDispatch();
 
   const { bodyData } = useSelector(
-    (rootReducer: any) => rootReducer.requestReducer
+    (rootReducer: RootReducer) => rootReducer.requestReducer
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

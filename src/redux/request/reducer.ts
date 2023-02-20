@@ -1,14 +1,17 @@
+import { AuthorizationTypes } from "../../enums/AuthorizationTypes";
 import { BodyTypes } from "../../enums/BodyTypes";
 import { HttpMethods } from "../../enums/HttpMethods";
-import { IRequest } from "../../interfaces/IRequest";
+import { RequestState, StandardAction } from "../../types";
 import requestTypes from "./requestTypes";
 
-const INITIAL_STATE: IRequest = {
+const INITIAL_STATE: RequestState = {
   data: [],
   headers: {},
   status: 100,
   httpMethod: HttpMethods.GET,
   bodyType: BodyTypes.NONE,
+  authorizationType: AuthorizationTypes.NONE,
+  authorizationToken: "",
   bodyData: "",
   requestHeaders: {
     Accept: "application/json",
@@ -17,7 +20,10 @@ const INITIAL_STATE: IRequest = {
   isLoading: false,
 };
 
-const requestReducer = (state = INITIAL_STATE, action: any) => {
+const requestReducer = (
+  state = INITIAL_STATE,
+  action: StandardAction
+): RequestState => {
   switch (action.type) {
     case requestTypes.SEND:
       return {
@@ -35,6 +41,16 @@ const requestReducer = (state = INITIAL_STATE, action: any) => {
       return {
         ...state,
         bodyType: action.payload,
+      };
+    case requestTypes.SET_AUTHORIZATION_TYPE:
+      return {
+        ...state,
+        authorizationType: action.payload,
+      };
+    case requestTypes.SET_AUTHORIZATION_TOKEN:
+      return {
+        ...state,
+        authorizationToken: action.payload,
       };
     case requestTypes.SET_BODY_DATA:
       return {
