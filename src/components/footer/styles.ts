@@ -43,3 +43,13 @@ export const ButtonPreferences = styled.button`
     outline: none;
   }
 `;
+
+export const Link = styled.a`
+  color: inherit;
+  text-decoration: none;
+
+  :hover {
+    color: ${colors.blue};
+    text-decoration: underline;
+  }
+`;

@@ -17,7 +17,7 @@ export const Row = styled.div`
   justify-content: flex-start;
   align-items: center;
   background-color: ${({ theme }) =>
-    theme.name === "dark" ? colors.darkTwo : colors.white};
+    theme.name === "dark" ? colors.darkTwo : colors.pacificGray};
   padding: 1rem;
   border-radius: 0.375rem;
   word-break: break-all;

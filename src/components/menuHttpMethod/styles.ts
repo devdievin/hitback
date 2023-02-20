@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "../../styles/colors";
 
 export const Container = styled.div`
   display: flex;
@@ -15,7 +16,14 @@ export const MenuItem = styled.div`
   transition: background 0.2s linear;
   cursor: pointer;
 
+  :not(:last-child) {
+    border-bottom: 1px solid
+      ${({ theme }) =>
+        theme.name === "dark" ? colors.darkThree : colors.pacificGray};
+  }
+
   :hover {
-    background-color: ${({ theme }) => theme.backgroundSecondary};
+    background-color: ${({ theme }) =>
+      theme.name === "dark" ? colors.darkThree : colors.pacificGray};
   }
 `;
