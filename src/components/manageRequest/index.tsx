@@ -21,6 +21,7 @@ import MenuHttpMethod from "../menuHttpMethod";
 // Styles
 import { Row1, InputRequest, ButtonRequest, Row2, Form } from "./styles";
 import { Wrapper } from "../../styles/global";
+import { IHitbackResponse } from "../../types";
 
 type FormDataRequest = {
   url: string;
@@ -51,7 +52,7 @@ export default function ManageRequest() {
   const onSubmit = async (data: FormDataRequest) => {
     try {
       const { url } = data;
-      console.log("Request Headers:", requestHeaders);
+      // console.log("Request Headers:", requestHeaders);
 
       if (!checkDataIntegrity(httpMethod, bodyData)) {
         dispatch(
@@ -74,7 +75,7 @@ export default function ManageRequest() {
     } catch (error) {
       dispatch(setIsLoading(false));
       dispatch(getRequestAction(error.response));
-      console.error("CATCH Error:", error);
+      console.log("CATCH Error:", error);
     } finally {
       dispatch(setIsLoading(false));
     }

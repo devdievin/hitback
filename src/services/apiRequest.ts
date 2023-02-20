@@ -12,18 +12,31 @@ export default async function apiRequest(
   bodyData: string,
   headers: HitbackRequestHeaders
 ) {
-  async function hitback(url: string, options?: RequestInit) {
-    const startTime = performance.now();
-    const response = await fetch(url, options);
-    const endTime = performance.now();
-    const duration = endTime - startTime;
-    const responseCustomHeader = new Response(response.body, response);
-    responseCustomHeader.headers.set(
-      "X-Request-Duration",
-      formatResponseDuration(duration)
-    );
-
-    return await fetchToAxios(responseCustomHeader);
+  async function hitback(
+    url: string,
+    options?: RequestInit
+  ): Promise<IHitbackResponse> {
+    try {
+      const startTime = performance.now();
+      const response = await fetch(url, options);
+      const endTime = performance.now();
+      const duration = endTime - startTime;
+      const responseCustomHeader = new Response(response.body, response);
+      responseCustomHeader.headers.set(
+        "X-Request-Duration",
+        formatResponseDuration(duration)
+      );
+      return await fetchToAxios(responseCustomHeader);
+    } catch (error) {
+      // console.error("HITBACK error:", error.message);
+      return {
+        data: { ERROR: error.message },
+        status: 500,
+        statusText: "",
+        headers: headers,
+        config: {},
+      };
+    }
   }
 
   async function fetchToAxios<T>(

@@ -46,7 +46,7 @@ export default function HeadersSection() {
     // console.log(requestHeaders);
     // console.log("change Headers");
     const content_header = Object.entries(requestHeaders).filter(
-      (header) => header[value] !== null && header[key] !== "Authorization"
+      (header) => header[value] !== undefined && header[key] !== "Authorization"
     );
 
     setHeadersList(content_header as HeadersArray);
